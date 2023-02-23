@@ -1,11 +1,25 @@
 {
-  "plugins": ["@typescript-eslint"],
-  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "google"],
+  "plugins": ["react", "@typescript-eslint"],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "google"
+  ],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "@typescript-eslint/consistent-type-imports": "warn",
+    "func-style": ["error", "declaration", { "allowArrowFunctions": false }],
     "require-jsdoc": 0,
     "object-curly-spacing": 0,
-    "new-cap": 0
+    "new-cap": 0,
+    "@typescript-eslint/consistent-type-imports": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "function-declaration"
+      }
+    ]
   }
 }
