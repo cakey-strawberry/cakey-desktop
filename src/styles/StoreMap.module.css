@@ -1,0 +1,51 @@
+.store_contents {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  color: #000000;
+}
+
+.store_detail {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
+  padding: 1rem;
+  margin-right: 0.5rem;
+  background-color: #ffffff;
+}
+
+.store_info_wrapper {
+  width: 100%;
+  height: 5rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #000000;
+}
+
+.chef_info_button {
+  width: 10rem;
+  cursor: pointer;
+}
+
+.comment_button {
+  width: 10rem;
+  cursor: pointer;
+}
+
+.store_map {
+  flex: 1;
+  height: 100%;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+.review_wrapper {
+  width: 100%;
+  height: 90%;
+  padding: 0.5rem;
+  color: #000000;
+  margin-bottom: 1rem;
+  border: 1px solid #000000;
+}
