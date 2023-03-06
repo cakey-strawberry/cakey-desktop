@@ -1,7 +1,6 @@
-import Link from 'next/link';
 import Router from 'next/router';
 
-import Search from '@/common/components/Search';
+import Layout from '@/common/components/Layout';
 import { NeedSignUpModal } from '@/components/Auth/NeedSignUpModal';
 
 import { useModal } from '@/common/hooks/useModal';
@@ -23,30 +22,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <header className="header">
-        <div className="left_header">
-          <Link href="/">Logo</Link>
-          <Search
-            onSearch={() => Router.push('/store-search')}
-            placeholder="스토어 검색"
-          />
-        </div>
-        <div className="right_header">
-          <Link href="/add-store" className="button">
-            스토어 추가
-          </Link>
-          <Link href="/bookmarked-stores" className="button">
-            북마크
-          </Link>
-          <button onClick={handleUserProfileClick} className="button">
-            유저 프로필
-          </button>
-        </div>
-      </header>
-      <main className="main">
+      <Layout onUserProfileClick={handleUserProfileClick}>
         <Component {...pageProps} />
         {isOpen && <NeedSignUpModal onCloseButtonClick={closeModal} />}
-      </main>
+      </Layout>
     </>
   );
 }
