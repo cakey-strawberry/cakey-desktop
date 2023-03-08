@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import type { ChangeEvent, FormEvent } from 'react';
 
-interface SearchProps {
+type SearchProps = {
   placeholder?: string;
   onSearch: (searchValue: string) => void;
-}
+};
 
 export default function Search({ placeholder, onSearch }: SearchProps) {
   const [searchValue, setSearchValue] = useState('');

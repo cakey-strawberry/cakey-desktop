@@ -1,10 +1,10 @@
 import styles from '@/styles/Modal.module.css';
 
-interface ModalProps {
+type ModalProps = {
   children?: React.ReactNode;
   buttonText: string;
   onClick: () => void;
-}
+};
 
 export default function Modal({ children, buttonText, onClick }: ModalProps) {
   return (

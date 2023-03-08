@@ -3,9 +3,9 @@ import Router from 'next/router';
 
 import Search from '@/common/components/Search';
 
-interface HeaderProps {
+type HeaderProps = {
   onUserProfileClick: () => void;
-}
+};
 
 export default function Header({ onUserProfileClick }: HeaderProps) {
   return (

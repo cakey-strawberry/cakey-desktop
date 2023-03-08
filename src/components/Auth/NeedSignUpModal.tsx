@@ -2,9 +2,9 @@ import Router from 'next/router';
 
 import Modal from '@/common/components/Modal';
 
-interface NeedSignUpModalProps {
+type NeedSignUpModalProps = {
   onCloseButtonClick: () => void;
-}
+};
 
 export function NeedSignUpModal({ onCloseButtonClick }: NeedSignUpModalProps) {
   function handleSocialLoginButtonClick() {
