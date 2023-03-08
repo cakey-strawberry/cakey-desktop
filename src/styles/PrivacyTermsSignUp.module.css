@@ -1,0 +1,25 @@
+.privacy_terms_buttons_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 100%;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+.privacy_terms_button_checkbox_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #000000;
+  margin-bottom: 1rem;
+}
+
+.privacy_button {
+  width: 10rem;
+  padding: 1rem;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #6b6b6b;
+}

@@ -1,0 +1,72 @@
+.add_store_contents {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+.store_info_buttons_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.store_indicate_wrapper {
+  width: 10rem;
+  height: 2rem;
+  text-align: center;
+}
+
+.store_input {
+  width: 10rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border: 1px solid #000000;
+}
+
+.add_store_button {
+  width: 10rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border: 1px solid #000000;
+  text-align: center;
+}
+
+.add_store_photo {
+  display: flex;
+  width: 20%;
+  height: 20rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f5f6;
+}
+
+.recommendation {
+  display: flex;
+  width: 20%;
+  height: 10rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+}
+
+.recommendation_comment {
+  display: flex;
+  width: 20%;
+  height: 5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+}
