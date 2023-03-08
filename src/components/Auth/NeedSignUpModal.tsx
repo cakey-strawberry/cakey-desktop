@@ -1,4 +1,4 @@
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import Modal from '@/common/components/Modal';
 
@@ -7,9 +7,11 @@ type NeedSignUpModalProps = {
 };
 
 export function NeedSignUpModal({ onCloseButtonClick }: NeedSignUpModalProps) {
+  const router = useRouter();
+
   function handleSocialLoginButtonClick() {
     onCloseButtonClick();
-    Router.push('/privacy-terms-signup');
+    router.push('/privacy-terms-signup');
   }
 
   return (

@@ -1,9 +1,11 @@
 import Head from 'next/head';
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import styles from '@/styles/ProfileSignUp.module.css';
 
 export default function ProfileSignUp() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -21,7 +23,7 @@ export default function ProfileSignUp() {
           placeholder="닉네임을 입력하세요"
         />
         <button
-          onClick={() => Router.push('/congratulation-signup')}
+          onClick={() => router.push('/congratulation-signup')}
           className={styles.button}
         >
           가입하기

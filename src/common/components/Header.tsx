@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import Search from '@/common/components/Search';
 
@@ -8,12 +8,14 @@ type HeaderProps = {
 };
 
 export default function Header({ onUserProfileClick }: HeaderProps) {
+  const router = useRouter();
+
   return (
     <header className="header">
       <div className="left_header">
         <Link href="/">Logo</Link>
         <Search
-          onSearch={() => Router.push('/store-search')}
+          onSearch={() => router.push('/store-search')}
           placeholder="스토어 검색"
         />
       </div>

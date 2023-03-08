@@ -1,9 +1,10 @@
 import Head from 'next/head';
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import styles from '@/styles/ChefDetail.module.css';
 
 export default function ChefDetail() {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -14,7 +15,7 @@ export default function ChefDetail() {
       </Head>
       <div className={styles.chef_contents}>
         <div className={styles.chef_detail}>셰프 디테일</div>
-        <button onClick={() => Router.back()} className={styles.back_button}>
+        <button onClick={router.back} className={styles.back_button}>
           뒤로 가기
         </button>
       </div>

@@ -4,9 +4,15 @@ type ModalProps = {
   children?: React.ReactNode;
   buttonText: string;
   onClick: () => void;
+  some?: () => void;
 };
 
-export default function Modal({ children, buttonText, onClick }: ModalProps) {
+export default function Modal({
+  children,
+  buttonText,
+  onClick,
+  some,
+}: ModalProps) {
   return (
     <div className={styles.modal}>
       <div className={styles.modal_contents}>

@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import styles from '@/styles/PrivacyTermsSignUp.module.css';
 
 export default function PrivacyTermsSignUp() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -16,7 +18,7 @@ export default function PrivacyTermsSignUp() {
       <div className={styles.privacy_terms_buttons_wrapper}>
         <div className={styles.privacy_terms_button_checkbox_wrapper}>
           <button
-            onClick={() => Router.push('/terms-of-service')}
+            onClick={() => router.push('/terms-of-service')}
             className={styles.privacy_button}
           >
             서비스 이용약관
@@ -25,7 +27,7 @@ export default function PrivacyTermsSignUp() {
         </div>
         <div className={styles.privacy_terms_button_checkbox_wrapper}>
           <button
-            onClick={() => Router.push('/terms-of-location')}
+            onClick={() => router.push('/terms-of-location')}
             className={styles.privacy_button}
           >
             위치 기반 서비스 약관 동의

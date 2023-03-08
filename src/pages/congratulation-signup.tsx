@@ -1,9 +1,11 @@
 import Head from 'next/head';
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import styles from '@/styles/CongratulationSignUp.module.css';
 
 export default function CongratulationSignUp() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -14,7 +16,7 @@ export default function CongratulationSignUp() {
       </Head>
       <div className={styles.congratulation_signUp_wrapper}>
         <div className={styles.congratulation_wrapper}>축하 관련 메시지</div>
-        <button onClick={() => Router.push('/')} className={styles.button}>
+        <button onClick={() => router.push('/')} className={styles.button}>
           확인
         </button>
       </div>
