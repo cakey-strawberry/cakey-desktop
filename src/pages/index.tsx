@@ -6,9 +6,11 @@ import Modal from '@/common/components/Modal';
 import { Dialog } from '@/common/components/Dialog';
 import { NeedSignUpModal } from '@/components/Auth/NeedSignUpModal';
 
-import { useModal as useSignUpModal } from '@/common/hooks/useModal';
-import { useModal as useCommentAddModal } from '@/common/hooks/useModal';
-import { useModal as useCommentEditModal } from '@/common/hooks/useModal';
+import {
+  useModal as useSignUpModal,
+  useModal as useCommentAddModal,
+  useModal as useCommentEditModal,
+} from '@/common/hooks/useModal';
 
 import styles from '@/styles/StoreMap.module.css';
 
