@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 
-import Layout from '@/common/components/Layout';
+import { Layout } from '@/common/components/Layout';
 import { NeedSignUpModal } from '@/components/Auth/NeedSignUpModal';
 
 import { useModal } from '@/common/hooks/useModal';
