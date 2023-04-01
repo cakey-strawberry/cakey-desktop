@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import Image from 'next/image';
+import TextField from '@mui/material/TextField';
+
+import SearchIcon from '@/common/assets/icons/search.svg';
 
 import type { ChangeEvent, FormEvent } from 'react';
 
@@ -21,14 +25,17 @@ export default function Search({ placeholder, onSearch }: SearchProps) {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <input
+      <TextField
+        sx={{ width: '22.5rem', height: '3.5rem', borderRadius: '28px' }}
+        InputProps={{
+          endAdornment: <Image src={SearchIcon} alt="search" />,
+          style: { borderRadius: '28px', padding: '0 8px' },
+        }}
         type="text"
         placeholder={placeholder}
         value={searchValue}
         onChange={handleInputChange}
       />
-
-      <button type="submit">Submit</button>
     </form>
   );
 }
