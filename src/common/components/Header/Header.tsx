@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-import { useRouter } from 'next/navigation';
 
 import { Search } from '@/common/components/Search';
 
