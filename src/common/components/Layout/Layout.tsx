@@ -17,7 +17,7 @@ export default function Layout({ children, onUserProfileClick }: LayoutProps) {
         justifyContent: 'center',
         alignItems: 'center',
         minWidth: '100%',
-        minHeight: '100vh',
+        minHeight: '100%',
         backgroundColor: '#efefef',
       }}
     >
@@ -25,7 +25,7 @@ export default function Layout({ children, onUserProfileClick }: LayoutProps) {
         sx={{
           position: 'relative',
           width: '73%',
-          height: '95vh',
+          height: '95%',
           padding: '24px',
           paddingTop: 0,
           borderRadius: '24px',
