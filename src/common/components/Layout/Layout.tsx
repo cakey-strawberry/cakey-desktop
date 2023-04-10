@@ -30,6 +30,7 @@ export default function Layout({ children, onUserProfileClick }: LayoutProps) {
           paddingTop: 0,
           borderRadius: '24px',
           backgroundColor: '#ffffff',
+          boxShadow: '0px 4px 34px rgba(0, 0, 0, 0.05)',
         }}
       >
         <Header onUserProfileClick={onUserProfileClick} />
