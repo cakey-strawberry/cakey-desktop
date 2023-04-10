@@ -64,6 +64,7 @@ export default function Header({ onUserProfileClick }: HeaderProps) {
           스토어 추가
         </Link>
         <Link
+          href="/bookmarked-stores"
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -74,7 +75,6 @@ export default function Header({ onUserProfileClick }: HeaderProps) {
             borderRadius: '50%',
             marginRight: '4px',
           }}
-          href="/bookmarked-stores"
         >
           <Image width={24} height={24} src={StarIcon} alt="user" />
         </Link>
