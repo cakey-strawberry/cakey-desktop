@@ -13,18 +13,25 @@ export const StoreWrapper = styled(Box)({
   zIndex: 10,
   backgroundColor: '#ffffff',
   color: '#000000',
-  borderBottom: '1px solid #F3F0F4',
   boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.05)',
 });
 
 export const StoreInfo = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
   alignItems: 'center',
   width: '100%',
   height: '50%',
+  marginBottom: '24px',
   borderBottom: '1px solid #F3F0F4',
+});
+
+export const StoreReviewWrapper = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  width: '100%',
+  height: '50%',
 });
 
 export const StoreImage = styled(Box)({
