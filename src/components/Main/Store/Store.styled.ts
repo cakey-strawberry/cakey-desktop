@@ -21,6 +21,7 @@ export const StoreInfo = styled(Box)({
   flexDirection: 'column',
   alignItems: 'center',
   width: '100%',
+  minHeight: '40%',
   height: '50%',
   marginBottom: '24px',
   borderBottom: '1px solid #F3F0F4',

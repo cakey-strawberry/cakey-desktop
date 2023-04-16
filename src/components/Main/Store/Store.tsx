@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import { Chip } from '@/common/components/Chip';
 import { Button } from '@/common/components/Button';
 
+import StoreReview from './StoreReview';
+
 import {
   StoreInfo,
   StoreName,
@@ -11,14 +13,12 @@ import {
   StoreImage,
   StoreWrapper,
   StoreDetailInfo,
-  StoreReviewWrapper,
   StoreNameAndFavorite,
   StoreDetailInfoWrapper,
   TimePointer,
 } from './Store.styled';
 
 import CakeIcon from '@/common/assets/icons/cake.svg';
-import EditIcon from '@/common/assets/icons/edit.svg';
 import PlaceIcon from '@/common/assets/icons/place.svg';
 import AccessTimeIcon from '@/common/assets/icons/access-time.svg';
 import UnFilledStarIcon from '@/common/assets/icons/unfilled-star.svg';
@@ -91,19 +91,7 @@ export default function Store() {
           </Box>
         </StoreDetailInfoWrapper>
       </StoreInfo>
-      <StoreReviewWrapper>
-        <Button
-          sx={{
-            borderRadius: '100px',
-            border: '1px solid #FFB2B6',
-            color: '#FF5169',
-            padding: '10px 24px 10px 16px',
-          }}
-          startIcon={<Image src={EditIcon} width={18} height={18} alt="edit" />}
-        >
-          리뷰 작성하기
-        </Button>
-      </StoreReviewWrapper>
+      <StoreReview />
     </StoreWrapper>
   );
 }
