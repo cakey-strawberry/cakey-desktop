@@ -10,6 +10,7 @@ import { Search } from '@/common/components/Search';
 import LogoIcon from '@/common/assets/icons/logo.svg';
 import UserIcon from '@/common/assets/icons/user.svg';
 import StarIcon from '@/common/assets/icons/star.svg';
+import StorePlusIcon from '@/common/assets/icons/store-plus.svg';
 
 type HeaderProps = {
   onUserProfileClick: () => void;
@@ -58,7 +59,7 @@ export default function Header({ onUserProfileClick }: HeaderProps) {
             style={{ marginRight: '4px' }}
             width={24}
             height={24}
-            src={StarIcon}
+            src={StorePlusIcon}
             alt="user"
           />
           스토어 추가

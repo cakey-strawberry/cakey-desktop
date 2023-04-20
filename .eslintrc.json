@@ -10,6 +10,7 @@
   "parser": "@typescript-eslint/parser",
   "rules": {
     "func-style": ["error", "declaration", { "allowArrowFunctions": false }],
+    "operator-linebreak": 0,
     "require-jsdoc": 0,
     "object-curly-spacing": 0,
     "new-cap": 0,

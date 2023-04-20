@@ -23,9 +23,12 @@ export default function Layout({ children, onUserProfileClick }: LayoutProps) {
     >
       <Box
         sx={{
+          display: 'flex',
+          flexDirection: 'column',
           position: 'relative',
+          minWidth: '1400px',
           width: '73%',
-          height: '95%',
+          height: '98%',
           padding: '24px',
           paddingTop: 0,
           borderRadius: '24px',
@@ -34,7 +37,7 @@ export default function Layout({ children, onUserProfileClick }: LayoutProps) {
         }}
       >
         <Header onUserProfileClick={onUserProfileClick} />
-        {children}
+        <Box sx={{ flex: 1 }}>{children}</Box>
       </Box>
     </Box>
   );

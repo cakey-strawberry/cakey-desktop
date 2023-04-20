@@ -26,7 +26,7 @@ export default function Search({ placeholder, onSearch }: SearchProps) {
   return (
     <form onSubmit={handleFormSubmit}>
       <TextField
-        sx={{ width: '22.5rem', height: '3.5rem', borderRadius: '28px' }}
+        sx={{ width: '25.7rem', height: '4rem', borderRadius: '28px' }}
         InputProps={{
           endAdornment: <Image src={SearchIcon} alt="search" />,
           style: { borderRadius: '28px', padding: '0 8px' },
