@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-import { Marker, GoogleMap, LoadScript } from '@react-google-maps/api';
+import {
+  Marker,
+  GoogleMap as GoogleMapOverlay,
+  LoadScript,
+} from '@react-google-maps/api';
 
 import { mapStyles } from './mapStyle';
 import type { CSSProperties } from 'react';
@@ -20,7 +24,7 @@ const mapOptions = {
   fullscreenControl: false,
 };
 
-function GooglMap() {
+function GoogleMap() {
   const [markerPosition, setMarkerPosition] =
     useState<google.maps.LatLngLiteral | null>(null);
 
@@ -44,7 +48,7 @@ function GooglMap() {
           : ''
       }
     >
-      <GoogleMap
+      <GoogleMapOverlay
         zoom={17}
         center={center}
         options={{ styles: mapStyles, ...mapOptions }}
@@ -52,9 +56,9 @@ function GooglMap() {
         onClick={handleMapClick}
       >
         {markerPosition && <Marker position={markerPosition} />}
-      </GoogleMap>
+      </GoogleMapOverlay>
     </LoadScript>
   );
 }
 
-export default GooglMap;
+export default GoogleMap;
