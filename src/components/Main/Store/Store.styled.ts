@@ -76,11 +76,3 @@ export const StoreDetailInfo = styled(Box)({
   alignItems: 'center',
   color: '#78767A',
 });
-
-export const TimePointer = styled(Box)({
-  width: '3px',
-  height: '3px',
-  backgroundColor: '#C8C6CA',
-  borderRadius: '50%',
-  margin: '0 4px',
-});

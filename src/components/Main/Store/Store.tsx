@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 
 import { Chip } from '@/common/components/Chip';
 import { Button } from '@/common/components/Button';
+import { MiddleDot } from '@/common/components/MiddleDot';
 
 import StoreReview from './StoreReview';
 
@@ -15,7 +16,6 @@ import {
   StoreDetailInfo,
   StoreNameAndFavorite,
   StoreDetailInfoWrapper,
-  TimePointer,
 } from './Store.styled';
 
 import CakeIcon from '@/common/assets/icons/cake.svg';
@@ -86,7 +86,7 @@ export default function Store() {
                 alt="place"
                 src={AccessTimeIcon}
               />
-              영업중 <TimePointer /> 10:00 ~ 22:00
+              영업중 <MiddleDot /> 10:00 ~ 22:00
             </StoreDetailInfo>
           </Box>
         </StoreDetailInfoWrapper>
