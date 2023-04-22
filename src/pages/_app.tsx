@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 
 import { Layout } from '@/common/components/Layout';
-import { NeedSignUpModal } from '@/components/Auth/NeedSignUpModal';
+import { LoginModal } from '@/components/Auth/LoginModal';
 
 import { useModal } from '@/common/hooks/useModal';
 
@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Layout onUserProfileClick={handleUserProfileClick}>
         <Component {...pageProps} />
-        {isOpen && <NeedSignUpModal onCloseButtonClick={closeModal} />}
+        {isOpen && <LoginModal onCloseButtonClick={closeModal} />}
       </Layout>
     </>
   );
