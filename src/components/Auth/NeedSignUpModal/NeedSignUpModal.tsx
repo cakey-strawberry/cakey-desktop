@@ -8,17 +8,19 @@ import {
   GoogleLoginButtonText,
   KakaoLoginButton,
   KakaoLoginButtonText,
-} from './LoginModal.styled';
+} from './NeedSignUpModal.styled';
 
 import LogoIcon from '@/common/assets/icons/logo.svg';
 import KakaoIcon from '@/common/assets/icons/kakao.svg';
 import GoogleIcon from '@/common/assets/icons/google.svg';
 
-type LoginModalProps = {
+type NeedSignUpModalProps = {
   onCloseButtonClick: () => void;
 };
 
-export default function LoginModal({ onCloseButtonClick }: LoginModalProps) {
+export default function NeedSignUpModal({
+  onCloseButtonClick,
+}: NeedSignUpModalProps) {
   const router = useRouter();
 
   function handleSocialLoginButtonClick() {
