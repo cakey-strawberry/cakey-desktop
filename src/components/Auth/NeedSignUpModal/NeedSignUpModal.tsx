@@ -47,8 +47,6 @@ export default function NeedSignUpModal({
           width: '328px',
           height: '40px',
           fontFamily: 'Pretendard',
-          fontStyle: 'normal',
-          fontSize: '14px',
           lineHeight: '20px',
           textAlign: 'center',
           letterSpacing: '0.25px',
