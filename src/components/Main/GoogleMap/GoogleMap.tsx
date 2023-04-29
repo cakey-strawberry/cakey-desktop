@@ -1,13 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
-  Marker,
-  GoogleMap as GoogleMapOverlay,
   LoadScript,
+  GoogleMap as GoogleMapOverlay,
 } from '@react-google-maps/api';
 
+import { Marker } from './Marker';
+
 import { mapStyles } from './mapStyle';
+
+import { MOCK_MARKERS } from '@/common/fixtures/marker';
+import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
+
 import type { CSSProperties } from 'react';
+import type { MarkerInfo } from '@/common/fixtures/marker';
 
 const containerStyle: CSSProperties = {
   width: '100%',
@@ -27,6 +33,8 @@ const mapOptions = {
 function GoogleMap() {
   const [markerPosition, setMarkerPosition] =
     useState<google.maps.LatLngLiteral | null>(null);
+  const [markers, setMarkers] = useState<MarkerInfo[]>([]);
+  const [mapReady, setMapReady] = useState<boolean>(false);
 
   const [center] = useState<google.maps.LatLngLiteral>({
     lat: 37.497952,
@@ -38,6 +46,16 @@ function GoogleMap() {
 
     setMarkerPosition({ lat: event.latLng.lat(), lng: event.latLng.lng() });
   }
+
+  function handleMapLoad() {
+    setMapReady(true);
+  }
+
+  useEffect(() => {
+    if (mapReady) {
+      setMarkers(MOCK_MARKERS);
+    }
+  }, [mapReady]);
 
   return (
     <LoadScript
@@ -54,8 +72,23 @@ function GoogleMap() {
         options={{ styles: mapStyles, ...mapOptions }}
         mapContainerStyle={{ ...containerStyle }}
         onClick={handleMapClick}
+        onLoad={handleMapLoad}
       >
-        {markerPosition && <Marker position={markerPosition} />}
+        {markerPosition && (
+          <Marker
+            status="default"
+            storeImage={MockThumbnailImage}
+            position={markerPosition}
+          />
+        )}
+        {markers.map((marker) => (
+          <Marker
+            key={marker.id}
+            status={marker.status}
+            position={marker.position}
+            storeImage={MockThumbnailImage}
+          />
+        ))}
       </GoogleMapOverlay>
     </LoadScript>
   );
