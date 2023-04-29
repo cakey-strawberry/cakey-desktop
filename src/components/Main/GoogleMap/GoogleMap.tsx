@@ -31,8 +31,6 @@ const mapOptions = {
 };
 
 function GoogleMap() {
-  const [markerPosition, setMarkerPosition] =
-    useState<google.maps.LatLngLiteral | null>(null);
   const [markers, setMarkers] = useState<MarkerInfo[]>([]);
   const [mapReady, setMapReady] = useState<boolean>(false);
 
@@ -40,12 +38,6 @@ function GoogleMap() {
     lat: 37.497952,
     lng: 127.027619,
   });
-
-  function handleMapClick(event: google.maps.MapMouseEvent) {
-    if (!event.latLng) return;
-
-    setMarkerPosition({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-  }
 
   function handleMapLoad() {
     setMapReady(true);
@@ -71,16 +63,8 @@ function GoogleMap() {
         center={center}
         options={{ styles: mapStyles, ...mapOptions }}
         mapContainerStyle={{ ...containerStyle }}
-        onClick={handleMapClick}
         onLoad={handleMapLoad}
       >
-        {markerPosition && (
-          <Marker
-            status="default"
-            storeImage={MockThumbnailImage}
-            position={markerPosition}
-          />
-        )}
         {markers.map((marker) => (
           <Marker
             key={marker.id}
