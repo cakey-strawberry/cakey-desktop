@@ -5,7 +5,7 @@ import {
   LoadScript,
 } from '@react-google-maps/api';
 
-import MapController from './MapController/MapController';
+import { MapController } from './MapController';
 
 import { mapStyles } from './mapStyle';
 
