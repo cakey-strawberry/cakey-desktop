@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   Marker,
   GoogleMap as GoogleMapOverlay,
@@ -7,9 +7,16 @@ import {
 
 import { MapController } from './MapController';
 
+import useMapZoom from './hooks/useMapZoom';
+
 import { mapStyles } from './mapStyle';
 
 import type { CSSProperties } from 'react';
+
+const INITIAL_LOCATION: google.maps.LatLngLiteral = {
+  lat: 37.497952,
+  lng: 127.027619,
+};
 
 const containerStyle: CSSProperties = {
   position: 'relative',
@@ -31,15 +38,39 @@ function GoogleMap() {
   const [markerPosition, setMarkerPosition] =
     useState<google.maps.LatLngLiteral | null>(null);
 
-  const [center] = useState<google.maps.LatLngLiteral>({
-    lat: 37.497952,
-    lng: 127.027619,
-  });
+  const [center, setCenter] =
+    useState<google.maps.LatLngLiteral>(INITIAL_LOCATION);
+
+  const { zoom, closeUpMap, closeDownMap } = useMapZoom();
+
+  const mapRef = useRef<google.maps.Map>();
 
   function handleMapClick(event: google.maps.MapMouseEvent) {
     if (!event.latLng) return;
 
     setMarkerPosition({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+  }
+
+  function handleMapLoad(mapInstance: google.maps.Map) {
+    mapRef.current = mapInstance;
+  }
+
+  function handleMapDragEnd() {
+    const currentLat = mapRef?.current?.getCenter()?.lat();
+    const currentLng = mapRef?.current?.getCenter()?.lng();
+
+    if (!currentLat || !currentLng) return;
+
+    const currentCenter: google.maps.LatLngLiteral = {
+      lat: currentLat,
+      lng: currentLng,
+    };
+
+    setCenter(currentCenter);
+  }
+
+  function handleLocationControllerClick() {
+    setCenter(INITIAL_LOCATION);
   }
 
   return (
@@ -52,17 +83,19 @@ function GoogleMap() {
       }
     >
       <GoogleMapOverlay
-        zoom={17}
+        zoom={zoom}
         center={center}
         options={{ styles: mapStyles, ...mapOptions }}
         mapContainerStyle={{ ...containerStyle }}
+        onLoad={handleMapLoad}
         onClick={handleMapClick}
+        onDragEnd={handleMapDragEnd}
       >
         {markerPosition && <Marker position={markerPosition} />}
         <MapController
-          onCloseUpClick={() => console.log('close up')}
-          onCloseDownClick={() => console.log('close down')}
-          onLocationClick={() => console.log('location')}
+          onCloseUpClick={closeUpMap}
+          onCloseDownClick={closeDownMap}
+          onLocationClick={handleLocationControllerClick}
         />
       </GoogleMapOverlay>
     </LoadScript>
