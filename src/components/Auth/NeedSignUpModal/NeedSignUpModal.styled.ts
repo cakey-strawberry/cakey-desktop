@@ -21,7 +21,6 @@ export const GoogleLoginButton = styled(Button)({
 export const GoogleLoginButtonText = styled(Typography)({
   height: '24px',
   fontFamily: 'Pretendard',
-  fontStyle: 'normal',
   fontWeight: '500',
   fontSize: '16px',
   /**
@@ -51,7 +50,6 @@ export const KakaoLoginButton = styled(Button)({
 export const KakaoLoginButtonText = styled(Typography)({
   height: '24px',
   fontFamily: 'Pretendard',
-  fontStyle: 'normal',
   fontWeight: '500',
   fontSize: '16px',
   /**
