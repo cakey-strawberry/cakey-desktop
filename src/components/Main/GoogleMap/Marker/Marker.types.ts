@@ -4,10 +4,10 @@ export type MarkerStatus = 'default' | 'select' | 'bookmark';
 
 export type MarkerProps = {
   position: google.maps.LatLngLiteral;
-  storeImage: StaticImageData | string;
+  markerImage: StaticImageData | string;
   status: MarkerStatus;
 };
 
 export type StatusMarkerProps = {
-  storeImage: StaticImageData | string;
+  markerImage: StaticImageData | string;
 };

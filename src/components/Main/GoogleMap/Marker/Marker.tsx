@@ -13,21 +13,21 @@ import BookmarkStarIcon from '@/common/assets/icons/bookmark-star.svg';
 
 import type { MarkerProps, StatusMarkerProps } from './Marker.types';
 
-function DefaultMarker({ storeImage }: StatusMarkerProps) {
+function DefaultMarker({ markerImage }: StatusMarkerProps) {
   return (
     <MarkerWrapper status="default">
       <MarkerImageWrapper>
-        <Image alt="store thumbnail" src={storeImage} fill />
+        <Image alt="store thumbnail" src={markerImage} fill />
       </MarkerImageWrapper>
     </MarkerWrapper>
   );
 }
 
-function BookMarkMarker({ storeImage }: StatusMarkerProps) {
+function BookMarkMarker({ markerImage }: StatusMarkerProps) {
   return (
     <MarkerWrapper status="bookmark">
       <MarkerImageWrapper>
-        <Image alt="store thumbnail" src={storeImage} fill />
+        <Image alt="store thumbnail" src={markerImage} fill />
       </MarkerImageWrapper>
       <BookmarkIconWrapper>
         <Image alt="bookmark" src={BookmarkStarIcon} width={16} height={16} />
@@ -36,13 +36,13 @@ function BookMarkMarker({ storeImage }: StatusMarkerProps) {
   );
 }
 
-function SelectedMarker({ storeImage }: StatusMarkerProps) {
+function SelectedMarker({ markerImage }: StatusMarkerProps) {
   return (
     <SelectedMarkerOuterWrapper>
       <SelectedMarkerInnerWrapper>
         <MarkerWrapper status="select">
           <MarkerImageWrapper>
-            <Image alt="store thumbnail" src={storeImage} fill />
+            <Image alt="store thumbnail" src={markerImage} fill />
           </MarkerImageWrapper>
         </MarkerWrapper>
       </SelectedMarkerInnerWrapper>
@@ -50,7 +50,7 @@ function SelectedMarker({ storeImage }: StatusMarkerProps) {
   );
 }
 
-function Marker({ status, position, storeImage }: MarkerProps) {
+function Marker({ status, position, markerImage }: MarkerProps) {
   return (
     <OverlayView
       position={position}
@@ -60,11 +60,9 @@ function Marker({ status, position, storeImage }: MarkerProps) {
         y: -height,
       })}
     >
-      <>
-        {status === 'default' && <DefaultMarker storeImage={storeImage} />}
-        {status === 'bookmark' && <BookMarkMarker storeImage={storeImage} />}
-        {status === 'select' && <SelectedMarker storeImage={storeImage} />}
-      </>
+      {status === 'default' && <DefaultMarker markerImage={markerImage} />}
+      {status === 'bookmark' && <BookMarkMarker markerImage={markerImage} />}
+      {status === 'select' && <SelectedMarker markerImage={markerImage} />}
     </OverlayView>
   );
 }

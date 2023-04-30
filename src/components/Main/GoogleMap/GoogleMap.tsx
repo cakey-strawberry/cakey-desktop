@@ -65,14 +65,15 @@ function GoogleMap() {
         mapContainerStyle={{ ...containerStyle }}
         onLoad={handleMapLoad}
       >
-        {markers.map((marker) => (
-          <Marker
-            key={marker.id}
-            status={marker.status}
-            position={marker.position}
-            storeImage={MockThumbnailImage}
-          />
-        ))}
+        {isMapReady &&
+          MOCK_MARKERS.map((marker) => (
+            <Marker
+              key={marker.id}
+              status={marker.status}
+              position={marker.position}
+              markerImage={MockThumbnailImage}
+            />
+          ))}
       </GoogleMapOverlay>
     </LoadScript>
   );
