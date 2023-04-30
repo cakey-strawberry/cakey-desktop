@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import {
   LoadScript,
@@ -13,7 +13,6 @@ import { MOCK_MARKERS } from '@/common/fixtures/marker';
 import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
 
 import type { CSSProperties } from 'react';
-import type { MarkerInfo } from '@/common/fixtures/marker';
 
 const containerStyle: CSSProperties = {
   width: '100%',
@@ -31,8 +30,7 @@ const mapOptions = {
 };
 
 function GoogleMap() {
-  const [markers, setMarkers] = useState<MarkerInfo[]>([]);
-  const [mapReady, setMapReady] = useState<boolean>(false);
+  const [isMapReady, setIsMapReady] = useState<boolean>(false);
 
   const [center] = useState<google.maps.LatLngLiteral>({
     lat: 37.497952,
@@ -40,14 +38,8 @@ function GoogleMap() {
   });
 
   function handleMapLoad() {
-    setMapReady(true);
+    setIsMapReady(true);
   }
-
-  useEffect(() => {
-    if (mapReady) {
-      setMarkers(MOCK_MARKERS);
-    }
-  }, [mapReady]);
 
   return (
     <LoadScript
