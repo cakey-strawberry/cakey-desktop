@@ -1,15 +1,18 @@
 import { useState } from 'react';
-
 import {
   Marker,
   GoogleMap as GoogleMapOverlay,
   LoadScript,
 } from '@react-google-maps/api';
 
+import { MapController } from './MapController';
+
 import { mapStyles } from './mapStyle';
+
 import type { CSSProperties } from 'react';
 
 const containerStyle: CSSProperties = {
+  position: 'relative',
   width: '100%',
   height: '100%',
   marginLeft: '-24px',
@@ -56,6 +59,11 @@ function GoogleMap() {
         onClick={handleMapClick}
       >
         {markerPosition && <Marker position={markerPosition} />}
+        <MapController
+          onCloseUpClick={() => console.log('close up')}
+          onCloseDownClick={() => console.log('close down')}
+          onLocationClick={() => console.log('location')}
+        />
       </GoogleMapOverlay>
     </LoadScript>
   );
