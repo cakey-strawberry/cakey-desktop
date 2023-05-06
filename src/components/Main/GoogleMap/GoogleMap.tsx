@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
-  Marker,
-  GoogleMap as GoogleMapOverlay,
   LoadScript,
+  GoogleMap as GoogleMapOverlay,
 } from '@react-google-maps/api';
 
 import { MapController } from './MapController';
 
+import { Marker } from './Marker';
+
 import { mapStyles } from './mapStyle';
 
+import { MOCK_MARKERS } from '@/common/fixtures/marker';
+import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
+
 import type { CSSProperties } from 'react';
+import type { MarkerInfo } from '@/common/fixtures/marker';
 
 const containerStyle: CSSProperties = {
   position: 'relative',
@@ -28,19 +33,23 @@ const mapOptions = {
 };
 
 function GoogleMap() {
-  const [markerPosition, setMarkerPosition] =
-    useState<google.maps.LatLngLiteral | null>(null);
+  const [markers, setMarkers] = useState<MarkerInfo[]>([]);
+  const [isMapReady, setIsMapReady] = useState<boolean>(false);
 
   const [center] = useState<google.maps.LatLngLiteral>({
     lat: 37.497952,
     lng: 127.027619,
   });
 
-  function handleMapClick(event: google.maps.MapMouseEvent) {
-    if (!event.latLng) return;
-
-    setMarkerPosition({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+  function handleMapLoad() {
+    setIsMapReady(true);
   }
+
+  useEffect(() => {
+    if (isMapReady) {
+      setMarkers(MOCK_MARKERS);
+    }
+  }, [isMapReady]);
 
   return (
     <LoadScript
@@ -56,9 +65,17 @@ function GoogleMap() {
         center={center}
         options={{ styles: mapStyles, ...mapOptions }}
         mapContainerStyle={{ ...containerStyle }}
-        onClick={handleMapClick}
+        onLoad={handleMapLoad}
       >
-        {markerPosition && <Marker position={markerPosition} />}
+        {markers.map((marker) => (
+          <Marker
+            key={marker.id}
+            type={marker.type}
+            selected={marker.selected}
+            position={marker.position}
+            markerImage={MockThumbnailImage}
+          />
+        ))}
         <MapController
           onCloseUpClick={() => console.log('close up')}
           onCloseDownClick={() => console.log('close down')}
