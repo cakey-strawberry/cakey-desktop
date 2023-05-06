@@ -11,46 +11,61 @@ import {
 
 import BookmarkStarIcon from '@/common/assets/icons/bookmark-star.svg';
 
-import type { MarkerProps, StatusMarkerProps } from './Marker.types';
+import type { ReactElement } from 'react';
+import type {
+  MarkerProps,
+  MarkerStatus,
+  StatusMarkerProps,
+} from './Marker.types';
 
-function DefaultMarker({ markerImage }: StatusMarkerProps) {
-  return (
-    <MarkerWrapper status="default">
-      <MarkerImageWrapper>
-        <Image alt="store thumbnail" src={markerImage} fill />
-      </MarkerImageWrapper>
-    </MarkerWrapper>
-  );
-}
+function SelectedMarkerWrapper({
+  selected,
+  children,
+}: {
+  selected: boolean;
+  children: ReactElement;
+}): ReactElement {
+  if (!selected) return children;
 
-function BookMarkMarker({ markerImage }: StatusMarkerProps) {
-  return (
-    <MarkerWrapper status="bookmark">
-      <MarkerImageWrapper>
-        <Image alt="store thumbnail" src={markerImage} fill />
-      </MarkerImageWrapper>
-      <BookmarkIconWrapper>
-        <Image alt="bookmark" src={BookmarkStarIcon} width={16} height={16} />
-      </BookmarkIconWrapper>
-    </MarkerWrapper>
-  );
-}
-
-function SelectedMarker({ markerImage }: StatusMarkerProps) {
   return (
     <SelectedMarkerOuterWrapper>
-      <SelectedMarkerInnerWrapper>
-        <MarkerWrapper status="select">
-          <MarkerImageWrapper>
-            <Image alt="store thumbnail" src={markerImage} fill />
-          </MarkerImageWrapper>
-        </MarkerWrapper>
-      </SelectedMarkerInnerWrapper>
+      <SelectedMarkerInnerWrapper>{children}</SelectedMarkerInnerWrapper>
     </SelectedMarkerOuterWrapper>
   );
 }
 
-function Marker({ status, position, markerImage }: MarkerProps) {
+function DefaultMarker({ selected, markerImage }: StatusMarkerProps) {
+  const markerStatus: MarkerStatus = selected ? 'selected' : 'default';
+
+  return (
+    <SelectedMarkerWrapper selected={selected}>
+      <MarkerWrapper status={markerStatus}>
+        <MarkerImageWrapper>
+          <Image alt="store thumbnail" src={markerImage} fill />
+        </MarkerImageWrapper>
+      </MarkerWrapper>
+    </SelectedMarkerWrapper>
+  );
+}
+
+function BookMarkMarker({ selected, markerImage }: StatusMarkerProps) {
+  const markerStatus: MarkerStatus = selected ? 'selected' : 'bookmark';
+
+  return (
+    <SelectedMarkerWrapper selected={selected}>
+      <MarkerWrapper status={markerStatus}>
+        <MarkerImageWrapper>
+          <Image alt="store thumbnail" src={markerImage} fill />
+        </MarkerImageWrapper>
+        <BookmarkIconWrapper>
+          <Image alt="bookmark" src={BookmarkStarIcon} width={16} height={16} />
+        </BookmarkIconWrapper>
+      </MarkerWrapper>
+    </SelectedMarkerWrapper>
+  );
+}
+
+function Marker({ type, selected, position, markerImage }: MarkerProps) {
   return (
     <OverlayView
       position={position}
@@ -60,9 +75,14 @@ function Marker({ status, position, markerImage }: MarkerProps) {
         y: -height,
       })}
     >
-      {status === 'default' && <DefaultMarker markerImage={markerImage} />}
-      {status === 'bookmark' && <BookMarkMarker markerImage={markerImage} />}
-      {status === 'select' && <SelectedMarker markerImage={markerImage} />}
+      <>
+        {type === 'default' && (
+          <DefaultMarker selected={selected} markerImage={markerImage} />
+        )}
+        {type === 'bookmark' && (
+          <BookMarkMarker selected={selected} markerImage={markerImage} />
+        )}
+      </>
     </OverlayView>
   );
 }

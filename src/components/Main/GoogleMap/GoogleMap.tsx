@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   LoadScript,
   GoogleMap as GoogleMapOverlay,
@@ -14,6 +14,7 @@ import { MOCK_MARKERS } from '@/common/fixtures/marker';
 import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
 
 import type { CSSProperties } from 'react';
+import type { MarkerInfo } from '@/common/fixtures/marker';
 
 const containerStyle: CSSProperties = {
   position: 'relative',
@@ -32,6 +33,7 @@ const mapOptions = {
 };
 
 function GoogleMap() {
+  const [markers, setMarkers] = useState<MarkerInfo[]>([]);
   const [isMapReady, setIsMapReady] = useState<boolean>(false);
 
   const [center] = useState<google.maps.LatLngLiteral>({
@@ -42,6 +44,12 @@ function GoogleMap() {
   function handleMapLoad() {
     setIsMapReady(true);
   }
+
+  useEffect(() => {
+    if (isMapReady) {
+      setMarkers(MOCK_MARKERS);
+    }
+  }, [isMapReady]);
 
   return (
     <LoadScript
@@ -59,15 +67,15 @@ function GoogleMap() {
         mapContainerStyle={{ ...containerStyle }}
         onLoad={handleMapLoad}
       >
-        {isMapReady &&
-          MOCK_MARKERS.map((marker) => (
-            <Marker
-              key={marker.id}
-              status={marker.status}
-              position={marker.position}
-              markerImage={MockThumbnailImage}
-            />
-          ))}
+        {markers.map((marker) => (
+          <Marker
+            key={marker.id}
+            type={marker.type}
+            selected={marker.selected}
+            position={marker.position}
+            markerImage={MockThumbnailImage}
+          />
+        ))}
         <MapController
           onCloseUpClick={() => console.log('close up')}
           onCloseDownClick={() => console.log('close down')}

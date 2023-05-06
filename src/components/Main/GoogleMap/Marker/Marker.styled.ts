@@ -1,22 +1,24 @@
 import { styled } from '@mui/material';
 import Box from '@mui/material/Box';
 
-import type { MarkerProps, MarkerStatus } from './Marker.types';
+import type { MarkerStatus } from './Marker.types';
 
-function getBorderColorOfStatus(status: MarkerStatus) {
+type MarkerBorderStatus = MarkerStatus | 'selected';
+
+function getBorderColorOfStatus(status: MarkerBorderStatus) {
   switch (status) {
     case 'default':
       return '#111111';
     case 'bookmark':
       return '#fc7189';
-    case 'select':
+    case 'selected':
       return '#ff5775';
   }
 }
 
 export const MarkerWrapper = styled(Box, {
   shouldForwardProp: (prop: string) => !['status'].includes(prop),
-})<Pick<MarkerProps, 'status'>>(({ status }) => ({
+})<{ status: MarkerBorderStatus }>(({ status }) => ({
   position: 'relative',
   display: 'flex',
   justifyContent: 'center',
