@@ -5,7 +5,7 @@ import type { MarkerStatus } from './Marker.types';
 
 type MarkerBorderStatus = MarkerStatus | 'selected';
 
-function getBorderColorOfStatus(status: MarkerBorderStatus) {
+function getBorderColorOfMarker(status: MarkerBorderStatus) {
   switch (status) {
     case 'default':
       return '#111111';
@@ -25,7 +25,7 @@ export const MarkerWrapper = styled(Box, {
   alignItems: 'center',
   width: '80px',
   height: '80px',
-  border: `2px solid ${getBorderColorOfStatus(status)}`,
+  border: `2px solid ${getBorderColorOfMarker(status)}`,
   borderRadius: '50%',
   backgroundColor: '#ffffff',
 
@@ -47,7 +47,7 @@ export const MarkerWrapper = styled(Box, {
     position: 'absolute',
     left: '30px',
     bottom: '-17px',
-    borderTop: `8px solid ${getBorderColorOfStatus(status)}`,
+    borderTop: `8px solid ${getBorderColorOfMarker(status)}`,
     borderLeft: '8px solid transparent',
     borderRight: '8px solid transparent',
     borderBottom: '8px solid transparent',
