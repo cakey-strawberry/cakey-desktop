@@ -1,9 +1,10 @@
 import { useState } from 'react';
-
 import {
   LoadScript,
   GoogleMap as GoogleMapOverlay,
 } from '@react-google-maps/api';
+
+import { MapController } from './MapController';
 
 import { Marker } from './Marker';
 
@@ -15,6 +16,7 @@ import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
 import type { CSSProperties } from 'react';
 
 const containerStyle: CSSProperties = {
+  position: 'relative',
   width: '100%',
   height: '100%',
   marginLeft: '-24px',
@@ -66,6 +68,11 @@ function GoogleMap() {
               markerImage={MockThumbnailImage}
             />
           ))}
+        <MapController
+          onCloseUpClick={() => console.log('close up')}
+          onCloseDownClick={() => console.log('close down')}
+          onLocationClick={() => console.log('location')}
+        />
       </GoogleMapOverlay>
     </LoadScript>
   );
