@@ -8,15 +8,15 @@ import LocationIcon from '@/common/assets/icons/location.svg';
 import CloseDownIcon from '@/common/assets/icons/close-down.svg';
 
 type MapControllerProps = {
-  onCloseUpClick: () => void;
-  onCloseDownClick: () => void;
-  onLocationClick: () => void;
+  onZoomInClick: () => void;
+  onZoomOutClick: () => void;
+  onCurrentLocationClick: () => void;
 };
 
 function MapController({
-  onCloseUpClick,
-  onCloseDownClick,
-  onLocationClick,
+  onZoomInClick,
+  onZoomOutClick,
+  onCurrentLocationClick,
 }: MapControllerProps) {
   return (
     <Box
@@ -40,7 +40,7 @@ function MapController({
           backgroundColor: '#ffffff',
           border: '1px solid #CED4DA',
         }}
-        onClick={onLocationClick}
+        onClick={onCurrentLocationClick}
       >
         <Image src={LocationIcon} alt="location" width={24} height={24} />
       </Button>
@@ -62,7 +62,7 @@ function MapController({
             padding: 0,
             overflow: 'hidden',
           }}
-          onClick={onCloseUpClick}
+          onClick={onZoomInClick}
         >
           <Image src={CloseUpIcon} alt="location" width={24} height={24} />
         </Button>
@@ -76,7 +76,7 @@ function MapController({
         />
         <Button
           sx={{ padding: 0, borderRadius: '50%', overflow: 'hidden' }}
-          onClick={onCloseDownClick}
+          onClick={onZoomOutClick}
         >
           <Image src={CloseDownIcon} alt="location" width={24} height={24} />
         </Button>

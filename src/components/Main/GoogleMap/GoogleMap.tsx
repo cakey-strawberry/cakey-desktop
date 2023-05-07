@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   LoadScript,
   GoogleMap as GoogleMapOverlay,
 } from '@react-google-maps/api';
 
 import { MapController } from './MapController';
+
+import useMapZoom from './hooks/useMapZoom';
 
 import { Marker } from './Marker';
 
@@ -15,6 +17,11 @@ import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
 
 import type { CSSProperties } from 'react';
 import type { MarkerInfo } from '@/common/fixtures/marker';
+
+const INITIAL_LOCATION: google.maps.LatLngLiteral = {
+  lat: 37.497952,
+  lng: 127.027619,
+};
 
 const containerStyle: CSSProperties = {
   position: 'relative',
@@ -36,20 +43,41 @@ function GoogleMap() {
   const [markers, setMarkers] = useState<MarkerInfo[]>([]);
   const [isMapReady, setIsMapReady] = useState<boolean>(false);
 
-  const [center] = useState<google.maps.LatLngLiteral>({
-    lat: 37.497952,
-    lng: 127.027619,
-  });
+  const [center, setCenter] =
+    useState<google.maps.LatLngLiteral>(INITIAL_LOCATION);
 
-  function handleMapLoad() {
-    setIsMapReady(true);
-  }
+  const { zoom, zoomInMap, zoomOutMap } = useMapZoom();
+
+  const mapRef = useRef<google.maps.Map>();
 
   useEffect(() => {
     if (isMapReady) {
       setMarkers(MOCK_MARKERS);
     }
   }, [isMapReady]);
+
+  function handleMapLoad(mapInstance: google.maps.Map) {
+    mapRef.current = mapInstance;
+    setIsMapReady(true);
+  }
+
+  function handleMapDragEnd() {
+    const currentLat = mapRef?.current?.getCenter()?.lat();
+    const currentLng = mapRef?.current?.getCenter()?.lng();
+
+    if (!currentLat || !currentLng) return;
+
+    const currentCenter: google.maps.LatLngLiteral = {
+      lat: currentLat,
+      lng: currentLng,
+    };
+
+    setCenter(currentCenter);
+  }
+
+  function handleCurrentLocationControllerClick() {
+    setCenter(INITIAL_LOCATION);
+  }
 
   return (
     <LoadScript
@@ -61,11 +89,12 @@ function GoogleMap() {
       }
     >
       <GoogleMapOverlay
-        zoom={17}
+        zoom={zoom}
         center={center}
         options={{ styles: mapStyles, ...mapOptions }}
         mapContainerStyle={{ ...containerStyle }}
         onLoad={handleMapLoad}
+        onDragEnd={handleMapDragEnd}
       >
         {markers.map((marker) => (
           <Marker
@@ -77,9 +106,9 @@ function GoogleMap() {
           />
         ))}
         <MapController
-          onCloseUpClick={() => console.log('close up')}
-          onCloseDownClick={() => console.log('close down')}
-          onLocationClick={() => console.log('location')}
+          onZoomInClick={zoomInMap}
+          onZoomOutClick={zoomOutMap}
+          onCurrentLocationClick={handleCurrentLocationControllerClick}
         />
       </GoogleMapOverlay>
     </LoadScript>
