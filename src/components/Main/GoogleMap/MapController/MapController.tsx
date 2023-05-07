@@ -10,13 +10,13 @@ import CloseDownIcon from '@/common/assets/icons/close-down.svg';
 type MapControllerProps = {
   onCloseUpClick: () => void;
   onCloseDownClick: () => void;
-  onLocationClick: () => void;
+  onCurrentLocationClick: () => void;
 };
 
 function MapController({
   onCloseUpClick,
   onCloseDownClick,
-  onLocationClick,
+  onCurrentLocationClick,
 }: MapControllerProps) {
   return (
     <Box
@@ -40,7 +40,7 @@ function MapController({
           backgroundColor: '#ffffff',
           border: '1px solid #CED4DA',
         }}
-        onClick={onLocationClick}
+        onClick={onCurrentLocationClick}
       >
         <Image src={LocationIcon} alt="location" width={24} height={24} />
       </Button>

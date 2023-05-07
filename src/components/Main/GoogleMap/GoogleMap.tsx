@@ -75,7 +75,7 @@ function GoogleMap() {
     setCenter(currentCenter);
   }
 
-  function handleLocationControllerClick() {
+  function handleCurrentLocationControllerClick() {
     setCenter(INITIAL_LOCATION);
   }
 
@@ -108,7 +108,7 @@ function GoogleMap() {
         <MapController
           onCloseUpClick={closeUpMap}
           onCloseDownClick={closeDownMap}
-          onLocationClick={handleLocationControllerClick}
+          onCurrentLocationClick={handleCurrentLocationControllerClick}
         />
       </GoogleMapOverlay>
     </LoadScript>
