@@ -1,17 +1,22 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
-  Marker,
-  GoogleMap as GoogleMapOverlay,
   LoadScript,
+  GoogleMap as GoogleMapOverlay,
 } from '@react-google-maps/api';
 
 import { MapController } from './MapController';
 
 import useMapZoom from './hooks/useMapZoom';
 
+import { Marker } from './Marker';
+
 import { mapStyles } from './mapStyle';
 
+import { MOCK_MARKERS } from '@/common/fixtures/marker';
+import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
+
 import type { CSSProperties } from 'react';
+import type { MarkerInfo } from '@/common/fixtures/marker';
 
 const INITIAL_LOCATION: google.maps.LatLngLiteral = {
   lat: 37.497952,
@@ -35,8 +40,8 @@ const mapOptions = {
 };
 
 function GoogleMap() {
-  const [markerPosition, setMarkerPosition] =
-    useState<google.maps.LatLngLiteral | null>(null);
+  const [markers, setMarkers] = useState<MarkerInfo[]>([]);
+  const [isMapReady, setIsMapReady] = useState<boolean>(false);
 
   const [center, setCenter] =
     useState<google.maps.LatLngLiteral>(INITIAL_LOCATION);
@@ -45,14 +50,15 @@ function GoogleMap() {
 
   const mapRef = useRef<google.maps.Map>();
 
-  function handleMapClick(event: google.maps.MapMouseEvent) {
-    if (!event.latLng) return;
-
-    setMarkerPosition({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-  }
+  useEffect(() => {
+    if (isMapReady) {
+      setMarkers(MOCK_MARKERS);
+    }
+  }, [isMapReady]);
 
   function handleMapLoad(mapInstance: google.maps.Map) {
     mapRef.current = mapInstance;
+    setIsMapReady(true);
   }
 
   function handleMapDragEnd() {
@@ -88,10 +94,17 @@ function GoogleMap() {
         options={{ styles: mapStyles, ...mapOptions }}
         mapContainerStyle={{ ...containerStyle }}
         onLoad={handleMapLoad}
-        onClick={handleMapClick}
         onDragEnd={handleMapDragEnd}
       >
-        {markerPosition && <Marker position={markerPosition} />}
+        {markers.map((marker) => (
+          <Marker
+            key={marker.id}
+            type={marker.type}
+            selected={marker.selected}
+            position={marker.position}
+            markerImage={MockThumbnailImage}
+          />
+        ))}
         <MapController
           onCloseUpClick={closeUpMap}
           onCloseDownClick={closeDownMap}
