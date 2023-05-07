@@ -7,7 +7,7 @@ const DEFAULT_ZOOM = 17;
 function useMapZoom() {
   const [zoom, setZoom] = useState<number>(DEFAULT_ZOOM);
 
-  function closeUpMap() {
+  function zoomInMap() {
     setZoom((prevZoom) => {
       if (prevZoom === MAX_ZOOM) return prevZoom;
 
@@ -15,7 +15,7 @@ function useMapZoom() {
     });
   }
 
-  function closeDownMap() {
+  function zoomOutMap() {
     setZoom((prevZoom) => {
       if (prevZoom === MIN_ZOOM) return prevZoom;
 
@@ -23,7 +23,7 @@ function useMapZoom() {
     });
   }
 
-  return { zoom, closeUpMap, closeDownMap };
+  return { zoom, zoomInMap, zoomOutMap };
 }
 
 export default useMapZoom;

@@ -46,7 +46,7 @@ function GoogleMap() {
   const [center, setCenter] =
     useState<google.maps.LatLngLiteral>(INITIAL_LOCATION);
 
-  const { zoom, closeUpMap, closeDownMap } = useMapZoom();
+  const { zoom, zoomInMap, zoomOutMap } = useMapZoom();
 
   const mapRef = useRef<google.maps.Map>();
 
@@ -106,8 +106,8 @@ function GoogleMap() {
           />
         ))}
         <MapController
-          onCloseUpClick={closeUpMap}
-          onCloseDownClick={closeDownMap}
+          onZoomInClick={zoomInMap}
+          onZoomOutClick={zoomOutMap}
           onCurrentLocationClick={handleCurrentLocationControllerClick}
         />
       </GoogleMapOverlay>
