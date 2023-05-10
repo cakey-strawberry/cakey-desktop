@@ -16,6 +16,9 @@ export const GoogleLoginButton = styled(Button)({
   border: '1px solid #E9ECEF',
   borderRadius: '50px',
   textTransform: 'none',
+  '&:hover': {
+    backgroundColor: '#EFEEEC',
+  },
 });
 
 export const GoogleLoginButtonText = styled(Typography)({
@@ -45,6 +48,9 @@ export const KakaoLoginButton = styled(Button)({
   height: '52px',
   backgroundColor: '#FEE500',
   borderRadius: '50px',
+  '&:hover': {
+    backgroundColor: '#F5DB4B',
+  },
 });
 
 export const KakaoLoginButtonText = styled(Typography)({
