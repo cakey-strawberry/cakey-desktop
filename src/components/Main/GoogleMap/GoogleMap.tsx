@@ -4,16 +4,13 @@ import {
   GoogleMap as GoogleMapOverlay,
 } from '@react-google-maps/api';
 
-import { MapController } from './MapController';
-
-import useMapZoom from './hooks/useMapZoom';
-
-import { Marker } from './Marker';
-
-import { mapStyles } from './mapStyle';
-
 import { MOCK_MARKERS } from '@/common/fixtures/marker';
 import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
+
+import { Marker } from './Marker';
+import { mapStyles } from './mapStyle';
+import { MapController } from './MapController';
+import useMapZoom from './hooks/useMapZoom';
 
 import type { CSSProperties } from 'react';
 import type { MarkerInfo } from '@/common/fixtures/marker';

@@ -6,13 +6,11 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 
 import { Button } from '@/common/components/Button';
-
-import { StoreReviewWrapper } from './Store.styled';
-
 import EditIcon from '@/common/assets/icons/edit.svg';
 import MoreVertIcon from '@/common/assets/icons/more-vert.svg';
-
 import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
+
+import { StoreReviewWrapper } from './Store.styled';
 
 import type { MouseEvent } from 'react';
 

@@ -2,6 +2,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { Dialog } from '@/common/components/Dialog';
+import LogoIcon from '@/common/assets/icons/logo.svg';
+import KakaoIcon from '@/common/assets/icons/kakao.svg';
+import GoogleIcon from '@/common/assets/icons/google.svg';
 
 import {
   GoogleLoginButton,
@@ -9,10 +12,6 @@ import {
   KakaoLoginButton,
   KakaoLoginButtonText,
 } from './NeedSignUpModal.styled';
-
-import LogoIcon from '@/common/assets/icons/logo.svg';
-import KakaoIcon from '@/common/assets/icons/kakao.svg';
-import GoogleIcon from '@/common/assets/icons/google.svg';
 
 type NeedSignUpModalProps = {
   onCloseButtonClick: () => void;
@@ -29,17 +28,14 @@ export default function NeedSignUpModal({
   }
 
   return (
-    <Dialog.Wrapper
-      open={true}
-      width="376px"
-      onClose={onCloseButtonClick}
-    >
+    <Dialog.Wrapper open={true} width="376px" onClose={onCloseButtonClick}>
       <Dialog.Title
         sx={{
           display: 'flex',
           justifyContent: 'center',
           marginBottom: '24px',
-        }}>
+        }}
+      >
         <Image src={LogoIcon} alt="logo" width={100} height={22.5} />
       </Dialog.Title>
       <Dialog.Content
@@ -77,9 +73,7 @@ export default function NeedSignUpModal({
         </GoogleLoginButton>
         <KakaoLoginButton onClick={handleSocialLoginButtonClick}>
           <Image src={KakaoIcon} width={24} height={24} alt="Kakao logo" />
-          <KakaoLoginButtonText>
-            카카오로 계속하기
-          </KakaoLoginButtonText>
+          <KakaoLoginButtonText>카카오로 계속하기</KakaoLoginButtonText>
         </KakaoLoginButton>
       </Dialog.Actions>
     </Dialog.Wrapper>
