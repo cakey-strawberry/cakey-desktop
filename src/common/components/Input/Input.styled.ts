@@ -1,7 +1,7 @@
 import { styled } from '@mui/system';
 import TextField from '@mui/material/TextField';
 
-export const NicknameTextField = styled(TextField)({
+export const CustomTextField = styled(TextField)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
@@ -9,7 +9,7 @@ export const NicknameTextField = styled(TextField)({
   height: '56px',
   marginBottom: '40px',
 
-  // NOTE: TextField의 'input 영역 + 아이콘(X, !)'을 감싸고 있는 div에 적용된 스타일
+  // NOTE: TextField의 'input 영역 + 아이콘 영역'을 감싸고 있는 div에 적용된 스타일
   '& .MuiInputBase-root': {
     display: 'flex',
     flexDirection: 'row',
@@ -17,7 +17,7 @@ export const NicknameTextField = styled(TextField)({
     padding: '8px 0px 8px 16px',
   },
 
-  // NOTE: TextField의 'input 영역 + 아이콘(X, !)'을 감싸고 있는 div의 테두리에 적용된 스타일
+  // NOTE: TextField의 'input 영역 + 아이콘 영역'을 감싸고 있는 div의 테두리에 적용된 스타일
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       borderColor: '#6C757D',
@@ -41,7 +41,7 @@ export const NicknameTextField = styled(TextField)({
     },
   },
 
-  // NOTE: TextField의 'input 영역(아이콘을 제외한 영역)'에 적용된 스타일
+  // NOTE: TextField의 'input 영역(아이콘 영역을 제외한 영역)'에 적용된 스타일
   '& .MuiInputBase-input': {
     display: 'flex',
     flexDirection: 'column',
