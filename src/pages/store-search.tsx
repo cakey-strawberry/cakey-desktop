@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Box from '@mui/material/Box';
 
-import NotFound from '@/components/StoreSearch/NotFound/NotFound';
+import { NotFound } from '@/components/StoreSearch/NotFound';
 
 export default function StoreSearch() {
   return (
