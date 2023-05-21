@@ -1,4 +1,6 @@
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+
+import { Button } from '@/common/components/Button';
 
 type NextButtonProps = {
   type: 'button' | 'submit';
