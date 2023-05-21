@@ -4,8 +4,11 @@ import Box from '@mui/material/Box';
 import { Chip } from '@/common/components/Chip';
 import { Button } from '@/common/components/Button';
 import { MiddleDot } from '@/common/components/MiddleDot';
-
-import StoreReview from './StoreReview';
+import CakeIcon from '@/common/assets/icons/cake.svg';
+import PlaceIcon from '@/common/assets/icons/place.svg';
+import AccessTimeIcon from '@/common/assets/icons/access-time.svg';
+import UnFilledStarIcon from '@/common/assets/icons/unfilled-star.svg';
+import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
 
 import {
   StoreInfo,
@@ -17,12 +20,7 @@ import {
   StoreNameAndFavorite,
   StoreDetailInfoWrapper,
 } from './Store.styled';
-
-import CakeIcon from '@/common/assets/icons/cake.svg';
-import PlaceIcon from '@/common/assets/icons/place.svg';
-import AccessTimeIcon from '@/common/assets/icons/access-time.svg';
-import UnFilledStarIcon from '@/common/assets/icons/unfilled-star.svg';
-import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
+import StoreReview from './StoreReview';
 
 export default function Store() {
   return (

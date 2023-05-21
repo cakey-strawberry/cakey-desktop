@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { OverlayView } from '@react-google-maps/api';
 
+import BookmarkStarIcon from '@/common/assets/icons/bookmark-star.svg';
+
 import {
   MarkerWrapper,
   MarkerImageWrapper,
@@ -8,8 +10,6 @@ import {
   SelectedMarkerInnerWrapper,
   SelectedMarkerOuterWrapper,
 } from './Marker.styled';
-
-import BookmarkStarIcon from '@/common/assets/icons/bookmark-star.svg';
 
 import type { ReactElement } from 'react';
 import type {

@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import Image from 'next/image';
 
 import { Button } from '@/common/components/Button';
-
 import CloseUpIcon from '@/common/assets/icons/close-up.svg';
 import LocationIcon from '@/common/assets/icons/location.svg';
 import CloseDownIcon from '@/common/assets/icons/close-down.svg';

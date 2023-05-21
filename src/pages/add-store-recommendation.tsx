@@ -2,9 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 
 import Modal from '@/common/components/Modal';
-
 import { useModal } from '@/common/hooks/useModal';
-
 import styles from '@/styles/AddStore.module.css';
 
 export default function AddStoreRecommendation() {

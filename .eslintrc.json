@@ -1,6 +1,7 @@
 {
   "plugins": ["react", "@typescript-eslint"],
   "extends": [
+    "plugin:import/recommended",
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:react/recommended",
@@ -15,6 +16,21 @@
     "object-curly-spacing": 0,
     "new-cap": 0,
     "quote-props": 0,
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "type"
+        ],
+        "newlines-between": "always"
+      }
+    ],
     "@typescript-eslint/consistent-type-imports": "warn",
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": [

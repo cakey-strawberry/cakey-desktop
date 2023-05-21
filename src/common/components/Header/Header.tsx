@@ -6,7 +6,6 @@ import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 
 import { Search } from '@/common/components/Search';
-
 import LogoIcon from '@/common/assets/icons/logo.svg';
 import UserIcon from '@/common/assets/icons/user.svg';
 import StarIcon from '@/common/assets/icons/star.svg';
