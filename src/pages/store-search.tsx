@@ -1,6 +1,7 @@
 import Head from 'next/head';
+import Box from '@mui/material/Box';
 
-import styles from '@/styles/StoreSearch.module.css';
+import NotFound from '@/components/StoreSearch/NotFound/NotFound';
 
 export default function StoreSearch() {
   return (
@@ -11,12 +12,19 @@ export default function StoreSearch() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.store_result_text_wrapper}>검색어 결과</div>
-      <div className={styles.store_search_wrapper}>
-        <div className={styles.searched_store_wrapper}>스토어 이름</div>
-        <div className={styles.searched_store_wrapper}>스토어 이름</div>
-        <div className={styles.searched_store_wrapper}>스토어 이름</div>
-      </div>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+          borderRadius: '24px',
+          overflow: 'hidden',
+        }}
+      >
+        <NotFound />
+      </Box>
     </>
   );
 }
