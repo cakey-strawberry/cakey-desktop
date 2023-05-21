@@ -38,6 +38,9 @@ export default function NextButton({
         background: disabled ? '#E9ECEF' : '#FF5775',
         borderRadius: '100px',
         boxShadow: 'none',
+        '&:hover': {
+          backgroundColor: disabled ? '#E9ECEF' : '#FA3B5E',
+        },
       }}
     >
       <Typography
