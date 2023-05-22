@@ -34,7 +34,7 @@ export default function PrivacyTermsSignUp() {
           </button>
           <input type="checkbox" />
         </div>
-        <Link href="/profile-signup" className={styles.privacy_button}>
+        <Link href="/profile-sign-up" className={styles.privacy_button}>
           다음
         </Link>
       </div>
