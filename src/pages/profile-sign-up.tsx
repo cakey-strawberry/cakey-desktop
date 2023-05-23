@@ -6,13 +6,12 @@ import { Box, Typography } from '@mui/material';
 import { NicknameInput } from '@/components/Auth/NicknameInput';
 import { ProfileImage } from '@/components/Auth/ProfileImage';
 import { NextButton } from '@/components/Auth/NextButton';
-
 import LogoCakeIcon from '@/common/assets/icons/logo-cake.svg';
 
 export type FormValues = {
   profileImage: File | null;
   nickname: string;
-}
+};
 
 export default function ProfileSignUp() {
   const {
