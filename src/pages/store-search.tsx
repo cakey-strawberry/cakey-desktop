@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 import { Store } from '@/components/StoreSearch/Store';
 import { STORES } from '@/common/fixtures/store';
@@ -20,10 +21,20 @@ export default function StoreSearch() {
           alignItems: 'center',
           width: '100%',
           height: '100%',
+          marginTop: '40px',
           borderRadius: '24px',
           overflow: 'hidden',
         }}
       >
+        {STORES.length > 0 && (
+          <Box sx={{ width: '496px', textAlign: 'left' }}>
+            <Typography
+              sx={{ fontWeight: 500, letterSpacing: '0.1px', color: '#78767A' }}
+            >
+              총 {STORES.length}개
+            </Typography>
+          </Box>
+        )}
         {STORES.map((store) => (
           <Store key={store.id} {...store} />
         ))}
