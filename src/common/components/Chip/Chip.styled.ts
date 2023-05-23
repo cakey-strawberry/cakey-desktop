@@ -1,7 +1,7 @@
 import { styled } from '@mui/material';
 import MuiChip from '@mui/material/Chip';
 
-const CustomChip = styled(MuiChip)({
+const Chip = styled(MuiChip)({
   height: '32px',
   padding: '6px 12px',
   borderRadius: '8px',
@@ -18,4 +18,4 @@ const CustomChip = styled(MuiChip)({
   },
 });
 
-export default CustomChip;
+export default Chip;
