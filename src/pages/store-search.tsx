@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Box from '@mui/material/Box';
 
-import { NotFound } from '@/components/StoreSearch/NotFound';
+import { Store } from '@/components/StoreSearch/Store';
+import { STORES } from '@/common/fixtures/store';
 
 export default function StoreSearch() {
   return (
@@ -15,7 +16,7 @@ export default function StoreSearch() {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
           alignItems: 'center',
           width: '100%',
           height: '100%',
@@ -23,7 +24,9 @@ export default function StoreSearch() {
           overflow: 'hidden',
         }}
       >
-        <NotFound />
+        {STORES.map((store) => (
+          <Store key={store.id} {...store} />
+        ))}
       </Box>
     </>
   );
