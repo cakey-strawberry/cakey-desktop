@@ -1,4 +1,4 @@
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 
 export const CustomTextField = styled(TextField)({
