@@ -24,7 +24,7 @@ export default function NeedSignUpModal({
 
   function handleSocialLoginButtonClick() {
     onCloseButtonClick();
-    router.push('/privacy-terms-signup');
+    router.push('/privacy-terms-sign-up');
   }
 
   return (
