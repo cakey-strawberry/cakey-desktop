@@ -1,4 +1,7 @@
 import { Controller } from 'react-hook-form';
+
+import { CustomTextField } from './Input.styled';
+
 import type {
   Control,
   FieldValues,
@@ -7,8 +10,6 @@ import type {
   Path,
 } from 'react-hook-form';
 import type { TextFieldProps, InputBaseProps } from '@mui/material';
-
-import { CustomTextField } from './Input.styled';
 
 type CustomInputProps<TFieldValues extends FieldValues> = TextFieldProps & {
   name: Path<TFieldValues>;

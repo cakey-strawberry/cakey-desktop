@@ -4,7 +4,6 @@ import Image from 'next/image';
 import IconButton from '@mui/material/IconButton';
 
 import { Input } from '@/common/components/Input';
-
 import ClearIcon from '@/common/assets/icons/input-clear.svg';
 import WarningIcon from '@/common/assets/icons/input-warning.svg';
 
