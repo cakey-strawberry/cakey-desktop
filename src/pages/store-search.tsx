@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import { Store } from '@/components/StoreSearch/Store';
+import { StoreCard } from '@/components/StoreSearch/StoreCard';
 import { STORES } from '@/common/fixtures/store';
 
 export default function StoreSearch() {
@@ -36,7 +36,7 @@ export default function StoreSearch() {
           </Box>
         )}
         {STORES.map((store) => (
-          <Store key={store.id} {...store} />
+          <StoreCard key={store.id} {...store} />
         ))}
       </Box>
     </>

@@ -24,11 +24,11 @@ import {
   StoreUserProfile,
   StoreUserName,
   StoreComment,
-} from './Store.styled';
+} from './StoreCard.styled';
 
 type StoreLabel = '쉐프 추천' | '디저트' | '커피';
 
-type StoreProps = {
+type StoreCardProps = {
   id: number;
   isAd: boolean;
   title: string;
@@ -43,14 +43,14 @@ type StoreProps = {
   isBookmarked: boolean;
 };
 
-export default function Store({
+export default function StoreCard({
   isAd,
   title,
   address,
   labels,
   commentInfo,
   isBookmarked,
-}: StoreProps) {
+}: StoreCardProps) {
   return (
     <StoreWrapper>
       <StoreImageWrapper>
