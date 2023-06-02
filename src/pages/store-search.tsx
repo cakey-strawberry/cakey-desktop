@@ -21,9 +21,11 @@ export default function StoreSearch() {
           alignItems: 'center',
           width: '100%',
           height: '100%',
-          marginTop: '40px',
+          paddingTop: '40px',
           borderRadius: '24px',
-          overflow: 'hidden',
+          overflowY: 'auto',
+          scrollbarWidth: 'none',
+          '::-webkit-scrollbar': { display: 'none' },
         }}
       >
         {STORES.length > 0 && (
