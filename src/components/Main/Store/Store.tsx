@@ -90,6 +90,8 @@ export default function Store() {
         </StoreDetailInfoWrapper>
       </StoreInfo>
       <StoreReview />
+      <StoreReview />
+      <StoreReview />
     </StoreWrapper>
   );
 }
