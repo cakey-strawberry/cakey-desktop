@@ -16,7 +16,12 @@ type ContentHeaderProps = {
 function ContentHeader({ title, subtitle }: ContentHeaderProps) {
   return (
     <HeaderWrapper>
-      <Image src={LogoCakeIcon} alt="logo" width={24} height={24} />
+      <Image
+        src={LogoCakeIcon}
+        alt="content header icon"
+        width={24}
+        height={24}
+      />
       <HeaderTitle>{title}</HeaderTitle>
       <HeaderSubtitle>{subtitle}</HeaderSubtitle>
     </HeaderWrapper>
