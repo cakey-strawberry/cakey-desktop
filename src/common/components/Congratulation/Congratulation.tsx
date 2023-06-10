@@ -10,12 +10,15 @@ import {
   CongratulationContent,
 } from './Congratulation.styled';
 
+import type { SxProps } from '@mui/material/styles';
+
 type CongratulationProps = {
   title: string;
   subtitle: string;
   imageSrc?: string;
   buttonText: string;
   onButtonClick: () => void;
+  sx?: SxProps;
 };
 
 function Congratulation({
@@ -24,9 +27,10 @@ function Congratulation({
   imageSrc = DefaultCongratulationImage,
   buttonText,
   onButtonClick,
+  sx,
 }: CongratulationProps) {
   return (
-    <CongratulationWrapper>
+    <CongratulationWrapper sx={sx}>
       <ContentHeader title={title} subtitle={subtitle} />
       <CongratulationContent>
         <Image src={imageSrc} alt="축하 이미지" width={160} height={160} />

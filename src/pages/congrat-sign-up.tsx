@@ -15,6 +15,9 @@ export default function CongratSignUp() {
       subtitle="가입이 완료 되었어요."
       buttonText="로그인하기"
       onButtonClick={handleButtonClick}
+      sx={{
+        marginTop: '60px',
+      }}
     />
   );
 }

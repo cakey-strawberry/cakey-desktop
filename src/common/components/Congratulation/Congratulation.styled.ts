@@ -7,9 +7,6 @@ export const CongratulationWrapper = styled(Box)({
   alignItems: 'center',
   padding: '0px',
   gap: '40px',
-  position: 'absolute',
-  left: '500px',
-  top: '148px',
 });
 
 export const CongratulationContent = styled(Box)({
