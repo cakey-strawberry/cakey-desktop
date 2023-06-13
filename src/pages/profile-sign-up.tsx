@@ -26,7 +26,7 @@ export default function ProfileSignUp() {
   function onSubmit(formValues: FormValues) {
     // TODO: form value 확인용. api 연결 시 해당 console.log는 제거하기
     console.log(formValues);
-    router.push('/congratulation-signup');
+    router.push('/congratulation-sign-up');
   }
 
   return (

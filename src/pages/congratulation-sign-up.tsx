@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 
 import { Congratulation } from '@/common/components/Congratulation';
 
-export default function CongratSignUp() {
+export default function CongratulationSignUp() {
   const router = useRouter();
 
   function handleButtonClick() {
