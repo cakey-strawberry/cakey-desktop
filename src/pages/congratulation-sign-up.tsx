@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 
-import { Congratulation } from '@/common/components/Congratulation';
+import { CongratulationCard } from '@/components/Misc/CongratulationCard';
 
 export default function CongratulationSignUp() {
   const router = useRouter();
@@ -10,7 +10,7 @@ export default function CongratulationSignUp() {
   }
 
   return (
-    <Congratulation
+    <CongratulationCard
       title="진심으로 환영합니다!"
       subtitle="가입이 완료 되었어요."
       buttonText="로그인하기"

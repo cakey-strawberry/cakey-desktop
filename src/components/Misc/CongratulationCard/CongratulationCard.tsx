@@ -6,13 +6,13 @@ import DefaultCongratulationImage
   from '@/common/assets/icons/congratulation-check.svg';
 
 import {
-  CongratulationWrapper,
-  CongratulationContent,
-} from './Congratulation.styled';
+  CongratulationCardWrapper,
+  CongratulationCardContainer,
+} from './CongratulationCard.styled';
 
 import type { SxProps } from '@mui/material/styles';
 
-type CongratulationProps = {
+type CongratulationCardProps = {
   title: string;
   subtitle: string;
   imageSrc?: string;
@@ -21,23 +21,23 @@ type CongratulationProps = {
   sx?: SxProps;
 };
 
-function Congratulation({
+function CongratulationCard({
   title,
   subtitle,
   imageSrc = DefaultCongratulationImage,
   buttonText,
   onButtonClick,
   sx,
-}: CongratulationProps) {
+}: CongratulationCardProps) {
   return (
-    <CongratulationWrapper sx={sx}>
+    <CongratulationCardWrapper sx={sx}>
       <ContentHeader title={title} subtitle={subtitle} />
-      <CongratulationContent>
+      <CongratulationCardContainer>
         <Image src={imageSrc} alt="축하 이미지" width={160} height={160} />
         <NextButton type="button" text={buttonText} onClick={onButtonClick} />
-      </CongratulationContent>
-    </CongratulationWrapper>
+      </CongratulationCardContainer>
+    </CongratulationCardWrapper>
   );
 }
 
-export default Congratulation;
+export default CongratulationCard;

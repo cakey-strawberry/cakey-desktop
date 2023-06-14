@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
-export const CongratulationWrapper = styled(Box)({
+export const CongratulationCardWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -9,7 +9,7 @@ export const CongratulationWrapper = styled(Box)({
   gap: '40px',
 });
 
-export const CongratulationContent = styled(Box)({
+export const CongratulationCardContainer = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
