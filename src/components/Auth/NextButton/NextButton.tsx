@@ -5,7 +5,7 @@ import { Button } from '@/common/components/Button';
 type NextButtonProps = {
   type: 'button' | 'submit';
   text: string;
-  disabled: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 };
 

@@ -14,6 +14,16 @@ export const StoreWrapper = styled(Box)({
   backgroundColor: '#ffffff',
   color: '#000000',
   boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.05)',
+  overflowY: 'auto',
+  '&::-webkit-scrollbar': {
+    display: 'block',
+    width: '6px',
+  },
+  '&::-webkit-scrollbar-thumb': {
+    borderRadius: '10px',
+    backgroundColor: '#6C757D',
+    opacity: 0.8,
+  },
 });
 
 export const StoreInfo = styled(Box)({
@@ -21,8 +31,7 @@ export const StoreInfo = styled(Box)({
   flexDirection: 'column',
   alignItems: 'center',
   width: '100%',
-  minHeight: '40%',
-  height: '50%',
+  minWidth: '100%',
   marginBottom: '24px',
   borderBottom: '1px solid #F3F0F4',
 });
@@ -37,9 +46,10 @@ export const StoreReviewWrapper = styled(Box)({
 
 export const StoreImage = styled(Box)({
   width: '100%',
-  height: '80%',
+  height: '246px',
+  minHeight: '246px',
   position: 'relative',
-  borderRadius: '24px',
+  borderRadius: '24px 24px 0 0',
   overflow: 'hidden',
 });
 
