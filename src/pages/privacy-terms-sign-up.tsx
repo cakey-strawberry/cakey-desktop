@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm, useWatch } from 'react-hook-form';
 import { Box, Typography, Divider } from '@mui/material';
 
+import { ContentHeader } from '@/common/components/ContentHeader';
+import { Checkbox } from '@/common/components/Checkbox';
 import { Terms } from '@/components/Auth/Terms';
 import { NextButton } from '@/components/Auth/NextButton';
-import { Checkbox } from '@/common/components/Checkbox';
-import LogoCakeIcon from '@/common/assets/icons/logo-cake.svg';
 
 export type FormValues = {
   locationConsent: boolean,
@@ -78,51 +77,10 @@ export default function PrivacyTermsSignUp() {
           top: '148px',
         }}
       >
-        <Box
-          id="header"
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: '0px',
-            gap: '6px',
-            width: '380px',
-            height: '96px',
-          }}
-        >
-          <Image src={LogoCakeIcon} alt="logo" width={24} height={24} />
-          <Typography
-            sx={{
-              width: '380px',
-              height: '36px',
-              fontFamily: 'Pretendard',
-              fontWeight: 700,
-              fontSize: '27px',
-              lineHeight: '36px',
-              display: 'flex',
-              alignItems: 'center',
-              color: '#111111',
-            }}
-          >
-            한 단계만 거치면 케이키 가입 완료!
-          </Typography>
-          <Typography
-            sx={{
-              width: '199px',
-              height: '24px',
-              fontFamily: 'Pretendard',
-              fontWeight: 500,
-              fontSize: '16px',
-              lineHeight: '24px',
-              display: 'flex',
-              alignItems: 'center',
-              letterSpacing: '0.15px',
-              color: '#111111',
-            }}
-          >
-            복잡한 단계는 모두 없앴습니다.
-          </Typography>
-        </Box>
+        <ContentHeader
+          title="한 단계만 거치면 케이키 가입 완료!"
+          subtitle="복잡한 단계는 모두 없앴습니다."
+        />
         <Box id="content">
           <form onSubmit={handleSubmit(onSubmit)}>
             <Box
