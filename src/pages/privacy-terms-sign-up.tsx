@@ -87,11 +87,11 @@ export default function PrivacyTermsSignUp() {
               id="all-terms-wrapper"
               sx={{
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
+                flexDirection: 'row',
+                alignItems: 'center',
                 padding: '0px',
                 width: '400px',
-                height: '80px',
+                height: '40px',
               }}
             >
               <Box
@@ -101,27 +101,10 @@ export default function PrivacyTermsSignUp() {
                   flexDirection: 'row',
                   alignItems: 'center',
                   padding: '0px',
-                  gap: '8px',
                   width: '400px',
                   height: '40px',
                 }}
               >
-                <Typography
-                  sx={{
-                    width: '352px',
-                    height: '24px',
-                    fontFamily: 'Pretendard',
-                    fontWeight: '700',
-                    fontSize: '16px',
-                    lineHeight: '24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    letterSpacing: '0.15px',
-                    color: '#111111',
-                  }}
-                >
-                  전체 동의
-                </Typography>
                 <Checkbox
                   name="allConsent"
                   checked={isAllConsentChecked}
@@ -134,24 +117,23 @@ export default function PrivacyTermsSignUp() {
                     height: '40px',
                   }}
                 />
+                <Typography
+                  sx={{
+                    width: '360px',
+                    height: '24px',
+                    fontFamily: 'Pretendard',
+                    fontWeight: '700',
+                    fontSize: '16px',
+                    lineHeight: 'normal',
+                    display: 'flex',
+                    alignItems: 'center',
+                    letterSpacing: '0.15px',
+                    color: '#111111',
+                  }}
+                >
+                  전체 동의
+                </Typography>
               </Box>
-              <Typography
-                sx={{
-                  width: '330px',
-                  height: '40px',
-                  fontFamily: 'Pretendard',
-                  fontWeight: '500',
-                  fontSize: '14px',
-                  lineHeight: '20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  letterSpacing: '0.1px',
-                  color: '#6C757D',
-                }}
-              >
-                위치기반 서비스 이용 약관(선택), 서비스 이용 약관(필수)에 <br />
-                모두 동의 합니다.
-              </Typography>
             </Box>
 
             <Divider
