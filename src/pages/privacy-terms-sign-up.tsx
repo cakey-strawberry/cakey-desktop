@@ -94,46 +94,34 @@ export default function PrivacyTermsSignUp() {
                 height: '40px',
               }}
             >
-              <Box
-                id="all-terms-title"
+              <Checkbox
+                name="allConsent"
+                checked={isAllConsentChecked}
+                onChange={
+                  (event) => handleAllConsentToggle(event.target.checked)
+                }
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
                   padding: '0px',
-                  width: '400px',
+                  width: '40px',
                   height: '40px',
                 }}
+              />
+              <Typography
+                sx={{
+                  width: '360px',
+                  height: '24px',
+                  fontFamily: 'Pretendard',
+                  fontWeight: '700',
+                  fontSize: '16px',
+                  lineHeight: 'normal',
+                  display: 'flex',
+                  alignItems: 'center',
+                  letterSpacing: '0.15px',
+                  color: '#111111',
+                }}
               >
-                <Checkbox
-                  name="allConsent"
-                  checked={isAllConsentChecked}
-                  onChange={
-                    (event) => handleAllConsentToggle(event.target.checked)
-                  }
-                  sx={{
-                    padding: '0px',
-                    width: '40px',
-                    height: '40px',
-                  }}
-                />
-                <Typography
-                  sx={{
-                    width: '360px',
-                    height: '24px',
-                    fontFamily: 'Pretendard',
-                    fontWeight: '700',
-                    fontSize: '16px',
-                    lineHeight: 'normal',
-                    display: 'flex',
-                    alignItems: 'center',
-                    letterSpacing: '0.15px',
-                    color: '#111111',
-                  }}
-                >
-                  전체 동의
-                </Typography>
-              </Box>
+                전체 동의
+              </Typography>
             </Box>
 
             <Divider
