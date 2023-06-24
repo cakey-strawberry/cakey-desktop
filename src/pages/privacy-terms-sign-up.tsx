@@ -5,7 +5,7 @@ import { Box, Typography, Divider } from '@mui/material';
 
 import { ContentHeader } from '@/common/components/ContentHeader';
 import { Checkbox } from '@/common/components/Checkbox';
-import { Terms } from '@/components/Auth/Terms';
+import { TermsCheckbox } from '@/components/Auth/TermsCheckbox';
 import { NextButton } from '@/components/Auth/NextButton';
 
 export type FormValues = {
@@ -143,17 +143,19 @@ export default function PrivacyTermsSignUp() {
                 marginBottom: '40px',
               }}
             >
-              <Terms
+              <TermsCheckbox
                 name="locationConsent"
-                title="위치기반 서비스 동의"
+                label="위치기반 서비스 동의"
                 isRequired={false}
                 control={control}
+                path="/terms-of-location"
               />
-              <Terms
+              <TermsCheckbox
                 name="serviceConsent"
-                title="서비스 이용약관 동의"
+                label="서비스 이용약관 동의"
                 isRequired={true}
                 control={control}
+                path="/terms-of-service"
               />
             </Box>
             <NextButton type="submit" text="동의하고 계속" disabled={!isValid} />
