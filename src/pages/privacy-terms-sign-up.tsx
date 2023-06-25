@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, useWatch } from 'react-hook-form';
-import { Box, Typography, Divider } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 
 import { ContentHeader } from '@/common/components/ContentHeader';
-import { Checkbox } from '@/common/components/Checkbox';
+import { AllTermsCheckbox } from '@/components/Auth/AllTermsCheckbox';
 import { TermsCheckbox } from '@/components/Auth/TermsCheckbox';
 import { NextButton } from '@/components/Auth/NextButton';
 
@@ -83,54 +83,18 @@ export default function PrivacyTermsSignUp() {
         />
         <Box id="content">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Box
-              id="all-terms-wrapper"
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                padding: '0px',
-                width: '400px',
-                height: '40px',
-              }}
-            >
-              <Checkbox
-                checked={isAllConsentChecked}
-                onChange={
-                  (event) => handleAllConsentToggle(event.target.checked)
-                }
-                sx={{
-                  width: '40px',
-                  height: '40px',
-                }}
-              />
-              <Typography
-                sx={{
-                  width: '360px',
-                  height: '24px',
-                  fontFamily: 'Pretendard',
-                  fontWeight: '700',
-                  fontSize: '16px',
-                  lineHeight: 'normal',
-                  display: 'flex',
-                  alignItems: 'center',
-                  letterSpacing: '0.15px',
-                  color: '#111111',
-                }}
-              >
-                전체 동의
-              </Typography>
-            </Box>
-
+            <AllTermsCheckbox
+              checked={isAllConsentChecked}
+              onChange={handleAllConsentToggle}
+            />
             <Divider
               sx={{
                 bgcolor: '#E9ECEF',
                 margin: '24px 0',
               }}
             />
-
             <Box
-              id="terms-list-container"
+              id="terms-checkbox-list"
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
