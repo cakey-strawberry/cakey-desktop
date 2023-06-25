@@ -95,13 +95,11 @@ export default function PrivacyTermsSignUp() {
               }}
             >
               <Checkbox
-                name="allConsent"
                 checked={isAllConsentChecked}
                 onChange={
                   (event) => handleAllConsentToggle(event.target.checked)
                 }
                 sx={{
-                  padding: '0px',
                   width: '40px',
                   height: '40px',
                 }}
@@ -145,16 +143,16 @@ export default function PrivacyTermsSignUp() {
             >
               <TermsCheckbox
                 name="locationConsent"
-                label="위치기반 서비스 동의"
-                isRequired={false}
                 control={control}
+                isRequired={false}
+                label="위치기반 서비스 동의"
                 path="/terms-of-location"
               />
               <TermsCheckbox
                 name="serviceConsent"
-                label="서비스 이용약관 동의"
-                isRequired={true}
                 control={control}
+                isRequired={true}
+                label="서비스 이용약관 동의"
                 path="/terms-of-service"
               />
             </Box>

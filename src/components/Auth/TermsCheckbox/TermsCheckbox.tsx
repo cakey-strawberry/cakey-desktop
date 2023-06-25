@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Controller } from 'react-hook-form';
 
 import { Checkbox } from '@/common/components/Checkbox';
 import RightArrowIcon from '@/common/assets/icons/right-arrow.svg';
@@ -14,7 +13,7 @@ import {
   TermsDetailsViewbutton,
 } from './TermsCheckbox.styled';
 
-import type { Control } from 'react-hook-form';
+import type { Control, RegisterOptions } from 'react-hook-form';
 import type { FormValues } from '@/pages/privacy-terms-sign-up';
 
 type TermsCheckboxProps = {
@@ -27,31 +26,26 @@ type TermsCheckboxProps = {
 
 export default function TermsCheckbox({
   name,
-  label,
-  isRequired,
   control,
+  isRequired,
+  label,
   path,
 }: TermsCheckboxProps) {
+  const rules: RegisterOptions = {
+    required: isRequired,
+  };
   const router = useRouter();
 
   return (
     <TermsCheckboxWrapper>
-      <Controller
+      <Checkbox
         name={name}
         control={control}
-        rules={{ required: isRequired }}
-        render={({ field }) => (
-          <Checkbox
-            {...field}
-            checked={field.value}
-            onChange={(event) => field.onChange(event.target.checked)}
-            sx={{
-              padding: '0px',
-              width: '40px',
-              height: '40px',
-            }}
-          />
-        )}
+        rules={rules}
+        sx={{
+          width: '40px',
+          height: '40px',
+        }}
       />
       <TermsLabelAndDetailsViewbutton>
         <TermsLabel>

@@ -4,6 +4,7 @@ import Checkbox from '@mui/material/Checkbox';
 const CustomCheckbox = styled(Checkbox)({
   color: '#495057',
   borderRadius: '2px',
+  padding: '0px',
 
   // NOTE: Checkbox에서 ㅁ 아이콘에 적용된 스타일
   '& .MuiSvgIcon-root': {

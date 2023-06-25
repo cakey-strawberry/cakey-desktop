@@ -1,1 +1,1 @@
-export { default as Checkbox } from './Checkbox.styled';
+export { default as Checkbox } from './Checkbox';
