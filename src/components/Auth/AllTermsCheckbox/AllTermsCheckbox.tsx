@@ -9,20 +9,22 @@ import type { ChangeEvent } from 'react';
 
 type AllTermsCheckboxProps = {
   checked: boolean;
-  onChange: (checked: boolean) => void;
+  onCheckboxChange: (checked: boolean) => void;
 }
 
 function AllTermsCheckbox({
   checked,
-  onChange,
+  onCheckboxChange,
 }: AllTermsCheckboxProps) {
+  function handleCheckboxChange(event: ChangeEvent<HTMLInputElement>) {
+    onCheckboxChange(event.target.checked);
+  }
+
   return (
     <AllTermsCheckboxWrapper>
       <Checkbox
         checked={checked}
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-          onChange(event.target.checked)
-        }
+        onChange={handleCheckboxChange}
         sx={{
           width: '40px',
           height: '40px',

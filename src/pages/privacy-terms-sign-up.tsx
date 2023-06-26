@@ -85,7 +85,7 @@ export default function PrivacyTermsSignUp() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <AllTermsCheckbox
               checked={isAllConsentChecked}
-              onChange={handleAllConsentToggle}
+              onCheckboxChange={handleAllConsentToggle}
             />
             <Divider
               sx={{
