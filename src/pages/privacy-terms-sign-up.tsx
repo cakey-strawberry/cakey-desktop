@@ -1,12 +1,34 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, useWatch } from 'react-hook-form';
-import { Box, Divider } from '@mui/material';
+import { styled, Box, Divider } from '@mui/material';
 
 import { ContentHeader } from '@/common/components/ContentHeader';
 import { AllTermsCheckbox } from '@/components/Auth/AllTermsCheckbox';
 import { TermsCheckbox } from '@/components/Auth/TermsCheckbox';
 import { NextButton } from '@/components/Auth/NextButton';
+
+const PageWrapper = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '0px',
+  gap: '40px',
+  position: 'absolute',
+  width: '400px',
+  left: '500px',
+  top: '148px',
+});
+
+const TermsCheckboxList = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  padding: '0px',
+  gap: '24px',
+  width: '400px',
+  marginBottom: '40px',
+});
 
 export type FormValues = {
   locationConsent: boolean,
@@ -63,67 +85,41 @@ export default function PrivacyTermsSignUp() {
 
   return (
     <>
-      <Box
-        id="wrapper"
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '0px',
-          gap: '40px',
-          position: 'absolute',
-          width: '400px',
-          left: '500px',
-          top: '148px',
-        }}
-      >
+      <PageWrapper>
         <ContentHeader
           title="한 단계만 거치면 케이키 가입 완료!"
           subtitle="복잡한 단계는 모두 없앴습니다."
         />
-        <Box id="content">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <AllTermsCheckbox
-              checked={isAllConsentChecked}
-              onCheckboxChange={handleAllConsentToggle}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <AllTermsCheckbox
+            checked={isAllConsentChecked}
+            onCheckboxChange={handleAllConsentToggle}
+          />
+          <Divider
+            sx={{
+              bgcolor: '#E9ECEF',
+              margin: '24px 0',
+            }}
+          />
+          <TermsCheckboxList>
+            <TermsCheckbox
+              name="locationConsent"
+              control={control}
+              isRequired={false}
+              label="위치기반 서비스 동의"
+              path="/terms-of-location"
             />
-            <Divider
-              sx={{
-                bgcolor: '#E9ECEF',
-                margin: '24px 0',
-              }}
+            <TermsCheckbox
+              name="serviceConsent"
+              control={control}
+              isRequired={true}
+              label="서비스 이용약관 동의"
+              path="/terms-of-service"
             />
-            <Box
-              id="terms-checkbox-list"
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                padding: '0px',
-                gap: '24px',
-                width: '400px',
-                marginBottom: '40px',
-              }}
-            >
-              <TermsCheckbox
-                name="locationConsent"
-                control={control}
-                isRequired={false}
-                label="위치기반 서비스 동의"
-                path="/terms-of-location"
-              />
-              <TermsCheckbox
-                name="serviceConsent"
-                control={control}
-                isRequired={true}
-                label="서비스 이용약관 동의"
-                path="/terms-of-service"
-              />
-            </Box>
-            <NextButton type="submit" text="동의하고 계속" disabled={!isValid} />
-          </form>
-        </Box>
-      </Box>
+          </TermsCheckboxList>
+          <NextButton type="submit" text="동의하고 계속" disabled={!isValid} />
+        </form>
+      </PageWrapper>
     </>
   );
 }
