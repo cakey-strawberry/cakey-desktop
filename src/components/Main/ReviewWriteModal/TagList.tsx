@@ -2,6 +2,8 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
+import { Button } from '@/common/components/Button';
+
 export default function TagList() {
   return (
     <TagListWrapper>
@@ -37,7 +39,7 @@ const TagListWrapper = styled(Box)({
   marginBottom: '24px',
 });
 
-const Tag = styled(Box)({
+const Tag = styled(Button)({
   padding: '6px 8px',
   borderRadius: '4px',
   fontWeight: 500,
