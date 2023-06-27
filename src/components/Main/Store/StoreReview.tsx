@@ -14,7 +14,11 @@ import { StoreReviewWrapper } from './Store.styled';
 
 import type { MouseEvent } from 'react';
 
-function StoreReview() {
+type StoreReviewProps = {
+  onReviewWriteButtonClick: () => void;
+};
+
+function StoreReview({ onReviewWriteButtonClick }: StoreReviewProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
@@ -36,6 +40,7 @@ function StoreReview() {
           padding: '10px 24px 10px 16px',
         }}
         startIcon={<Image width={18} height={18} alt="edit" src={EditIcon} />}
+        onClick={onReviewWriteButtonClick}
       >
         리뷰 작성하기
       </Button>

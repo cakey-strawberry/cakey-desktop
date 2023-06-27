@@ -22,7 +22,11 @@ import {
 } from './Store.styled';
 import StoreReview from './StoreReview';
 
-export default function Store() {
+type StoreProps = {
+  onReviewWriteButtonClick: () => void;
+};
+
+export default function Store({ onReviewWriteButtonClick }: StoreProps) {
   return (
     <StoreWrapper>
       <StoreInfo>
@@ -89,9 +93,7 @@ export default function Store() {
           </Box>
         </StoreDetailInfoWrapper>
       </StoreInfo>
-      <StoreReview />
-      <StoreReview />
-      <StoreReview />
+      <StoreReview onReviewWriteButtonClick={onReviewWriteButtonClick} />
     </StoreWrapper>
   );
 }
