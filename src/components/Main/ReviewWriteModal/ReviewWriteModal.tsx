@@ -37,6 +37,7 @@ export default function ReviewWriteModal({
           display: 'flex',
           flexDirection: 'column',
           alignContent: 'center',
+          marginTop: '8px',
         }}
       >
         <StoreInfo />
