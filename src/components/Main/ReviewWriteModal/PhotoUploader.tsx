@@ -29,7 +29,7 @@ export default function PhotoUploader() {
           (최대 3장)
         </Typography>
       </Box>
-      <PhotoSelectorWrapper>
+      <PhotoUploaderSlotList>
         <PhotoSelector>
           <Image width={24} height={24} src={CameraIcon} alt="camera" />
         </PhotoSelector>
@@ -39,7 +39,7 @@ export default function PhotoUploader() {
         <PhotoSelector>
           <Image width={24} height={24} src={CameraIcon} alt="camera" />
         </PhotoSelector>
-      </PhotoSelectorWrapper>
+      </PhotoUploaderSlotList>
     </AddingPhotoWrapper>
   );
 }
@@ -50,7 +50,7 @@ const AddingPhotoWrapper = styled(Box)({
   marginBottom: '24px',
 });
 
-const PhotoSelectorWrapper = styled(Box)({
+const PhotoUploaderSlotList = styled(Box)({
   width: '100%',
   display: 'flex',
   justifyContent: 'space-around',
