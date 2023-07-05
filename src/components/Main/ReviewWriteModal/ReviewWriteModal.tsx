@@ -5,7 +5,7 @@ import { Dialog } from '@/common/components/Dialog';
 
 import TagList from './TagList';
 import StoreInfo from './StoreInfo';
-import AddingPhoto from './AddingPhoto';
+import AddingPhoto from './PhotoUploader';
 import ReviewComment from './ReviewComment';
 
 import type { ChangeEvent } from 'react';

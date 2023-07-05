@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 
 import CameraIcon from '@/common/assets/icons/camera.svg';
 
-export default function AddingPhoto() {
+export default function PhotoUploader() {
   return (
     <AddingPhotoWrapper>
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
