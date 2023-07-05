@@ -30,15 +30,15 @@ export default function PhotoUploader() {
         </Typography>
       </Box>
       <PhotoUploaderSlotList>
-        <PhotoSelector>
+        <PhotoUploaderSlot>
           <Image width={24} height={24} src={CameraIcon} alt="camera" />
-        </PhotoSelector>
-        <PhotoSelector>
+        </PhotoUploaderSlot>
+        <PhotoUploaderSlot>
           <Image width={24} height={24} src={CameraIcon} alt="camera" />
-        </PhotoSelector>
-        <PhotoSelector>
+        </PhotoUploaderSlot>
+        <PhotoUploaderSlot>
           <Image width={24} height={24} src={CameraIcon} alt="camera" />
-        </PhotoSelector>
+        </PhotoUploaderSlot>
       </PhotoUploaderSlotList>
     </AddingPhotoWrapper>
   );
@@ -57,7 +57,7 @@ const PhotoUploaderSlotList = styled(Box)({
   alignItems: 'center',
 });
 
-const PhotoSelector = styled(Box)({
+const PhotoUploaderSlot = styled(Box)({
   width: '131px',
   height: '100px',
   display: 'flex',
