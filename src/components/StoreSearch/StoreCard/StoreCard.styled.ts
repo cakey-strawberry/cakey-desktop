@@ -18,7 +18,7 @@ export const StoreImageWrapper = styled(Box)({
   overflow: 'hidden',
 });
 
-export const StoreInfoWrapper = styled(Box)({
+export const StoreInfoSectionWrapper = styled(Box)({
   display: 'flex',
   flex: 1,
   flexDirection: 'column',
@@ -30,7 +30,7 @@ export const StoreHeader = styled(Box)({
   flexDirection: 'column',
 });
 
-export const StoreInfo = styled(Box)({
+export const StoreInfoSection = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',

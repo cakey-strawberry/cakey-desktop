@@ -12,9 +12,9 @@ import { StoreADChip, StoreSearchLabelChip } from '../Chip';
 import {
   StoreWrapper,
   StoreImageWrapper,
-  StoreInfoWrapper,
+  StoreInfoSectionWrapper,
   StoreHeader,
-  StoreInfo,
+  StoreInfoSection,
   StoreTitleWrapper,
   StoreTitle,
   StoreFavoriteButton,
@@ -56,9 +56,9 @@ export default function StoreCard({
       <StoreImageWrapper>
         <Image src={ThumbnailImage} alt="store image" fill />
       </StoreImageWrapper>
-      <StoreInfoWrapper>
+      <StoreInfoSectionWrapper>
         <StoreHeader>
-          <StoreInfo>
+          <StoreInfoSection>
             <StoreTitleWrapper>
               {isAd && <StoreADChip />}
               <StoreTitle>{title}</StoreTitle>
@@ -71,7 +71,7 @@ export default function StoreCard({
                 height={24}
               />
             </StoreFavoriteButton>
-          </StoreInfo>
+          </StoreInfoSection>
           <StoreAddress>{address}</StoreAddress>
           <Box>
             {labels.map((label) => (
@@ -106,7 +106,7 @@ export default function StoreCard({
             </StoreCommentUserWrapper>
           </StoreCommentWrapper>
         )}
-      </StoreInfoWrapper>
+      </StoreInfoSectionWrapper>
     </StoreWrapper>
   );
 }

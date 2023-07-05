@@ -1,10 +1,13 @@
 import Head from 'next/head';
 import Box from '@mui/material/Box';
 
+import { useModal } from '@/common/hooks/useModal';
 import { Store } from '@/components/Main/Store';
 import { GoogleMap } from '@/components/Main/GoogleMap';
+import { ReviewWriteModal } from '@/components/Main/ReviewWriteModal';
 
 export default function StoreMap() {
+  const { isOpen, openModal, closeModal } = useModal();
   return (
     <>
       <Head>
@@ -23,8 +26,9 @@ export default function StoreMap() {
           boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
         }}
       >
-        <Store />
+        <Store onReviewWriteButtonClick={openModal} />
         <GoogleMap />
+        <ReviewWriteModal isOpen={isOpen} onCloseButtonClick={closeModal} />
       </Box>
     </>
   );

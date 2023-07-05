@@ -26,7 +26,7 @@ export const StoreWrapper = styled(Box)({
   },
 });
 
-export const StoreInfo = styled(Box)({
+export const StoreInfoSection = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

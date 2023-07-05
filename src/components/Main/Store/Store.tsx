@@ -11,7 +11,7 @@ import UnFilledStarIcon from '@/common/assets/icons/unfilled-star.svg';
 import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
 
 import {
-  StoreInfo,
+  StoreInfoSection,
   StoreName,
   StoreChips,
   StoreImage,
@@ -22,10 +22,14 @@ import {
 } from './Store.styled';
 import StoreReview from './StoreReview';
 
-export default function Store() {
+type StoreProps = {
+  onReviewWriteButtonClick: () => void;
+};
+
+export default function Store({ onReviewWriteButtonClick }: StoreProps) {
   return (
     <StoreWrapper>
-      <StoreInfo>
+      <StoreInfoSection>
         <StoreImage>
           <Image fill alt="store thumbnail" src={MockThumbnailImage} />
         </StoreImage>
@@ -88,10 +92,8 @@ export default function Store() {
             </StoreDetailInfo>
           </Box>
         </StoreDetailInfoWrapper>
-      </StoreInfo>
-      <StoreReview />
-      <StoreReview />
-      <StoreReview />
+      </StoreInfoSection>
+      <StoreReview onReviewWriteButtonClick={onReviewWriteButtonClick} />
     </StoreWrapper>
   );
 }
