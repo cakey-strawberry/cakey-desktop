@@ -20,18 +20,21 @@ type DialogWrapperProps = DialogProps & {
   headerText?: string;
 };
 
-function DialogWrapper(props: DialogWrapperProps) {
+function DialogWrapper({
+  width,
+  onClose,
+  headerText,
+  children,
+  ...args
+}: DialogWrapperProps) {
   function handleClose(event: React.SyntheticEvent) {
-    if (!props.onClose) return;
+    if (!onClose) return;
 
-    props.onClose(event, 'backdropClick');
+    onClose(event, 'backdropClick');
   }
 
   return (
-    <CustomDialog
-      sx={{ '& .MuiPaper-root': { width: props.width } }}
-      {...props}
-    >
+    <CustomDialog sx={{ '& .MuiPaper-root': { width: width } }} {...args}>
       <Box
         sx={{
           width: '100%',
@@ -43,9 +46,9 @@ function DialogWrapper(props: DialogWrapperProps) {
           marginBottom: '16px',
         }}
       >
-        {props.headerText && (
+        {headerText && (
           <Typography sx={{ fontWeight: 'bold', fontSize: '22px' }}>
-            {props.headerText}
+            {headerText}
           </Typography>
         )}
         <Button
@@ -61,7 +64,7 @@ function DialogWrapper(props: DialogWrapperProps) {
           <Image src={CloseIcon} alt="close" />
         </Button>
       </Box>
-      {props.children}
+      {children}
     </CustomDialog>
   );
 }
