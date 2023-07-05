@@ -4,7 +4,7 @@ import { Button } from '@/common/components/Button';
 import { Dialog } from '@/common/components/Dialog';
 
 import TagList from './TagList';
-import StoreInfo from './StoreInfo';
+import StoreInfoSection from './StoreInfoSection';
 import AddingPhoto from './PhotoUploader';
 import ReviewComment from './ReviewComment';
 
@@ -40,7 +40,7 @@ export default function ReviewWriteModal({
           marginTop: '8px',
         }}
       >
-        <StoreInfo />
+        <StoreInfoSection />
         <ReviewComment
           value={comment}
           onTextFieldChange={handleReviewCommentChange}

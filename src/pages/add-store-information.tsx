@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import styles from '@/styles/AddStore.module.css';
 
-export default function AddStoreInformation() {
+export default function AddStoreInfoSectionrmation() {
   return (
     <>
       <Head>

@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography';
 import MockThumbnailImage from '@/common/assets/icons/thumbnail.png';
 import PlaceIcon from '@/common/assets/icons/place.svg';
 
-export default function StoreInfo() {
+export default function StoreInfoSection() {
   return (
-    <StoreInfoWrapper>
+    <StoreInfoSectionWrapper>
       <StoreThumbnailWrapper>
         <Image src={MockThumbnailImage} alt="store thumbnail" fill />
       </StoreThumbnailWrapper>
@@ -41,11 +41,11 @@ export default function StoreInfo() {
           서울특별시 용산구 한강대로40가길 42 1층
         </Typography>
       </StoreTittleAndAddressWrapper>
-    </StoreInfoWrapper>
+    </StoreInfoSectionWrapper>
   );
 }
 
-const StoreInfoWrapper = styled(Box)({
+const StoreInfoSectionWrapper = styled(Box)({
   display: 'flex',
   justifyContent: 'left',
   alignContent: 'center',
