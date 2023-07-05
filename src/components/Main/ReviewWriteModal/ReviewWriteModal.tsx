@@ -19,10 +19,10 @@ export default function ReviewWriteModal({
   isOpen,
   onCloseButtonClick,
 }: ReviewWriteModalProps) {
-  const [comment, setComment] = useState<string>('');
+  const [reviewContent, setReviewContent] = useState<string>('');
 
   function handleReviewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    setComment(event.target.value);
+    setReviewContent(event.target.value);
   }
 
   return (
@@ -42,7 +42,7 @@ export default function ReviewWriteModal({
       >
         <StoreInfoSection />
         <ReviewWritingSection
-          value={comment}
+          value={reviewContent}
           onTextFieldChange={handleReviewCommentChange}
         />
         <AddingPhoto />
