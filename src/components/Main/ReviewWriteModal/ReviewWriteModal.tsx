@@ -6,7 +6,7 @@ import { Dialog } from '@/common/components/Dialog';
 import TagList from './TagList';
 import StoreInfoSection from './StoreInfoSection';
 import AddingPhoto from './PhotoUploader';
-import ReviewComment from './ReviewComment';
+import ReviewWritingSection from './ReviewWritingSection';
 
 import type { ChangeEvent } from 'react';
 
@@ -41,7 +41,7 @@ export default function ReviewWriteModal({
         }}
       >
         <StoreInfoSection />
-        <ReviewComment
+        <ReviewWritingSection
           value={comment}
           onTextFieldChange={handleReviewCommentChange}
         />

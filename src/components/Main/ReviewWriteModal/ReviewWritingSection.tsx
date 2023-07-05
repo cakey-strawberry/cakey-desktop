@@ -10,7 +10,7 @@ type ReviewCommentProps = {
   onTextFieldChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-export default function ReviewComment({
+export default function ReviewWritingSection({
   value,
   onTextFieldChange,
 }: ReviewCommentProps) {
