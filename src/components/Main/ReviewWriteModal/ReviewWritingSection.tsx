@@ -29,7 +29,7 @@ export default function ReviewWritingSection({
       <ReviewTextField
         value={value}
         onChange={onTextFieldChange}
-        placeholder="가게에 대한 리뷰를 남겨주세요! (최소 50자, 최대 300자)"
+        placeholder="가게에 대한 리뷰를 남겨주세요!"
         multiline
       />
     </ReviewCommentWrapper>
