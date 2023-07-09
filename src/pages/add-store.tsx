@@ -1,29 +1,87 @@
-import Head from 'next/head';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { styled, Box } from '@mui/material';
 
-import styles from '@/styles/AddStore.module.css';
+import { ContentHeader } from '@/common/components/ContentHeader';
+import { StoreNameInput } from '@/components/AddStore/StoreNameInput';
+import { StoreAddressInput } from '@/components/AddStore/StoreAddressInput';
+import { OpeningHoursSection } from '@/components/AddStore/OpeningHoursSection';
+import { PhotoUploader } from '@/components/AddStore/PhotoUploader';
+import { TagSection } from '@/components/AddStore/TagSection';
+import { NextButton } from '@/components/AddStore/NextButton';
+
+export type FormValues = {
+  storeName: string;
+  storeAddress: string;
+  // TODO: 기능 추가시 주석제거 후 사용하기
+  // openingHours?: object;
+  // pictures?: File[];
+  // tags?: string[];
+}
 
 export default function AddStore() {
+  const {
+    handleSubmit,
+    control,
+    formState: { isValid },
+  } = useForm<FormValues>({
+    mode: 'onChange',
+    defaultValues: {
+      storeName: '',
+      storeAddress: '',
+      // TODO: 기능 추가시 주석제거 후 사용하기
+      // openingHours: {},
+      // pictures: [],
+      // tags: [],
+    },
+  });
+  const router = useRouter();
+
+  function onSubmit(formValues: FormValues) {
+    // TODO: form value 확인용. api 연결 시 해당 console.log는 제거하기
+    console.log(formValues);
+    router.push('/add-store-recommendation');
+  }
+
   return (
     <>
-      <Head>
-        <title>Cakey Add Store</title>
-        <meta name="description" content="add store page" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div className={styles.add_store_contents}>
-        <div className={styles.store_info_buttons_wrapper}>
-          <div className={styles.store_indicate_wrapper}>스텝 인디케이터</div>
-          <input
-            placeholder="가게 이름을 입력해주세요"
-            className={styles.store_input}
-          />
-        </div>
-        <Link href="/add-store-address" className={styles.add_store_button}>
-          다음
-        </Link>
-      </div>
+      <PageWrapper>
+        <ContentHeader
+          title="스토어 등록"
+          subtitle="맛있는 정보를 공유할 수 있습니다."
+        />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <StoreNameInput control={control} />
+          <StoreAddressInput control={control} />
+          <OpeningHoursSection />
+          <PhotoUploader />
+          <TagSection />
+          <NextButton type="submit" text="등록하기" disabled={!isValid} />
+        </form>
+      </PageWrapper>
     </>
   );
 }
+
+const PageWrapper = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '0px',
+  gap: '40px',
+  position: 'relative',
+  width: '400px',
+  left: '500px',
+  top: '60px',
+  /**
+   * NOTE: height이 넘쳐서 레이아웃 틀어지는 현상 발생
+   * 스크롤바를 숨기고 스크롤 가능하도록 height과 scroll 관련 style 적용
+   */
+  height: 'calc(100% - 80px)',
+  overflowY: 'auto',
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
+  msOverflowStyle: 'none',
+  scrollbarWidth: 'none',
+});
