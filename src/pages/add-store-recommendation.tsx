@@ -1,42 +1,85 @@
-import Head from 'next/head';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { styled, Box } from '@mui/material';
 
-import Modal from '@/common/components/Modal';
-import { useModal } from '@/common/hooks/useModal';
-import styles from '@/styles/AddStore.module.css';
+import { ContentHeader } from '@/common/components/ContentHeader';
+import { Button } from '@/common/components/Button';
+import {
+  ReviewWritingSection,
+} from '@/components/AddStore/ReviewWritingSection';
+import { NextButton } from '@/components/AddStore/NextButton';
+
+export type FormValues = {
+  reviewContent: string;
+}
 
 export default function AddStoreRecommendation() {
+  const {
+    handleSubmit,
+    control,
+    formState: { isValid },
+  } = useForm<FormValues>({
+    mode: 'onSubmit',
+    defaultValues: {
+      reviewContent: '',
+    },
+  });
   const router = useRouter();
-  const { isOpen, openModal, closeModal } = useModal();
 
-  function handleModalCloseButtonClick() {
-    closeModal();
-    router.push('/');
+  function onSubmit(formValues: FormValues) {
+    // TODO: form value 확인용. api 연결 시 해당 console.log는 제거하기
+    console.log(formValues);
+    router.push('/congratulation-add-store');
   }
 
   return (
     <>
-      <Head>
-        <title>Cakey Add Store recommendation</title>
-        <meta name="description" content="add store recommendation page" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div className={styles.add_store_contents}>
-        <div className={styles.store_info_buttons_wrapper}>
-          <div className={styles.store_indicate_wrapper}>스텝 인디케이터</div>
-          <div className={styles.recommendation}>추천사</div>
-          <div className={styles.recommendation_comment}>추천사 관련 문구</div>
-        </div>
-        <button onClick={openModal} className={styles.add_store_button}>
-          추가하기
-        </button>
-      </div>
-      {isOpen && (
-        <Modal buttonText="확인" onClick={handleModalCloseButtonClick}>
-          <div className={styles.review_wrapper}>스토어 생성 완료</div>
-        </Modal>
-      )}
+      <PageWrapper>
+        <ContentHeader
+          title="이곳을 추천하고 싶으신가요?"
+          subtitle="리뷰를 공유해주세요."
+        />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ReviewWritingSection control={control} />
+          <ButtonWrapper>
+            <SkipButton
+              onClick={() => router.push('/congratulation-add-store')}
+            >
+              건너뛰기
+            </SkipButton>
+            <NextButton type="submit" text="등록하기" disabled={!isValid} />
+          </ButtonWrapper>
+        </form>
+      </PageWrapper>
     </>
   );
 }
+
+const PageWrapper = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '0px',
+  gap: '40px',
+  position: 'relative',
+  width: '400px',
+  left: '500px',
+  top: '60px',
+});
+
+const ButtonWrapper = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '24px',
+  alignSelf: 'stretch',
+});
+
+const SkipButton = styled(Button)({
+  fontFamily: 'Pretendard',
+  fontSize: '14px',
+  fontWeight: '500',
+  lineHeight: 'normal',
+  letterSpacing: '0.1px',
+  color: '#ADB5BD',
+});
