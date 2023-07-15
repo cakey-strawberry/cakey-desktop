@@ -95,12 +95,14 @@ export default function OpeningHoursSection() {
               </OpeningHoursItemDays>
               <OpeningHoursItemTime>09:00 - 18:00</OpeningHoursItemTime>
             </Box>
-            <Image
-              src={HoursDeleteIcon}
-              alt="opening hours delete icon"
-              width={24}
-              height={24}
-            />
+            <Button sx={{ padding: '0px' }}>
+              <Image
+                src={HoursDeleteIcon}
+                alt="opening hours delete icon"
+                width={24}
+                height={24}
+              />
+            </Button>
           </OpeningHoursItem>
           <OpeningHoursItem>
             <Box
@@ -116,12 +118,14 @@ export default function OpeningHoursSection() {
               </OpeningHoursItemDays>
               <OpeningHoursItemClosedDay>휴무</OpeningHoursItemClosedDay>
             </Box>
-            <Image
-              src={HoursDeleteIcon}
-              alt="opening hours delete icon"
-              width={24}
-              height={24}
-            />
+            <Button sx={{ padding: '0px' }}>
+              <Image
+                src={HoursDeleteIcon}
+                alt="opening hours delete icon"
+                width={24}
+                height={24}
+              />
+            </Button>
           </OpeningHoursItem>
         </OpeningHoursList>
       </OpeningHoursContent>
