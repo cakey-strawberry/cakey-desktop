@@ -1,11 +1,22 @@
-import Image from 'next/image';
 import Box from '@mui/material/Box';
+import { Controller } from 'react-hook-form';
 import { styled } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import CameraIcon from '@/common/assets/icons/camera.svg';
+import PhotoUploaderSlot from './PhotoUploaderSlot';
 
-export default function PhotoUploader() {
+import type { Control } from 'react-hook-form';
+import type { Photo, ReviewWriteFormValues } from './hooks/useReviewForm';
+
+type PhotoUploaderProps = {
+  control: Control<ReviewWriteFormValues>;
+  onChange: (photos: Photo[]) => void;
+};
+
+export default function PhotoUploader({
+  control,
+  onChange,
+}: PhotoUploaderProps) {
   return (
     <AddingPhotoWrapper>
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
@@ -30,15 +41,17 @@ export default function PhotoUploader() {
         </Typography>
       </Box>
       <PhotoUploaderSlotList>
-        <PhotoUploaderSlot>
-          <Image width={24} height={24} src={CameraIcon} alt="camera" />
-        </PhotoUploaderSlot>
-        <PhotoUploaderSlot>
-          <Image width={24} height={24} src={CameraIcon} alt="camera" />
-        </PhotoUploaderSlot>
-        <PhotoUploaderSlot>
-          <Image width={24} height={24} src={CameraIcon} alt="camera" />
-        </PhotoUploaderSlot>
+        <Controller
+          name="photos"
+          control={control}
+          render={({ field: { value } }) => (
+            <>
+              <PhotoUploaderSlot photos={value} id={0} onChange={onChange} />
+              <PhotoUploaderSlot photos={value} id={1} onChange={onChange} />
+              <PhotoUploaderSlot photos={value} id={2} onChange={onChange} />
+            </>
+          )}
+        />
       </PhotoUploaderSlotList>
     </AddingPhotoWrapper>
   );
@@ -53,16 +66,6 @@ const AddingPhotoWrapper = styled(Box)({
 const PhotoUploaderSlotList = styled(Box)({
   width: '100%',
   display: 'flex',
-  justifyContent: 'space-around',
+  justifyContent: 'space-between',
   alignItems: 'center',
-});
-
-const PhotoUploaderSlot = styled(Box)({
-  width: '131px',
-  height: '100px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  borderRadius: '4px',
-  border: '1px solid #6C757D',
 });

@@ -1,19 +1,17 @@
 import { styled } from '@mui/material';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import type { ChangeEvent } from 'react';
+import { Input } from '@/common/components/Input';
+
+import type { Control } from 'react-hook-form';
+import type { ReviewWriteFormValues } from './hooks/useReviewForm';
 
 type ReviewCommentProps = {
-  value: string;
-  onTextFieldChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  control: Control<ReviewWriteFormValues>;
 };
 
-export default function ReviewWritingSection({
-  value,
-  onTextFieldChange,
-}: ReviewCommentProps) {
+export default function ReviewWritingSection({ control }: ReviewCommentProps) {
   return (
     <ReviewCommentWrapper>
       <Typography
@@ -26,11 +24,25 @@ export default function ReviewWritingSection({
       >
         리뷰
       </Typography>
-      <ReviewTextField
-        value={value}
-        onChange={onTextFieldChange}
+      <Input<ReviewWriteFormValues>
+        name="comment"
+        control={control}
         placeholder="가게에 대한 리뷰를 남겨주세요!"
         multiline
+        sx={{
+          width: '100%',
+          marginBottom: 0,
+          '& .MuiInputBase-root': {
+            width: '100%',
+            padding: '16px',
+          },
+          '& fieldset': {
+            border: '1px solid #a4aaae',
+          },
+          '& textarea': {
+            minHeight: '136px',
+          },
+        }}
       />
     </ReviewCommentWrapper>
   );
@@ -40,17 +52,4 @@ const ReviewCommentWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   marginBottom: '24px',
-});
-
-const ReviewTextField = styled(TextField)({
-  '& .MuiInputBase-root': {
-    padding: '16px',
-  },
-  '& fieldset': {
-    border: '1px solid #a4aaae',
-  },
-  '& textarea': {
-    minHeight: '136px',
-    maxHeight: '136px',
-  },
 });
