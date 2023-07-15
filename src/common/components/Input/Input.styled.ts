@@ -6,7 +6,7 @@ export const CustomTextField = styled(TextField)({
   flexDirection: 'column',
   alignItems: 'flex-start',
   width: '400px',
-  height: '56px',
+  minHeight: '56px',
   marginBottom: '60px',
 
   // NOTE: TextField의 'input 영역 + 아이콘 영역'을 감싸고 있는 div에 적용된 스타일
