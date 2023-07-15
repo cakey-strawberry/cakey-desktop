@@ -3,6 +3,11 @@ import { styled, Typography } from '@mui/material';
 
 import { Button } from '@/common/components/Button';
 
+const tagTextList = [
+  '디저트', '다양한 태그', '디저트', '커피', '다양한 태그',
+  '커피', '다양한 태그', '디저트', '다양한 태그', '디저트', '커피',
+];
+
 export default function TagSection() {
   return (
     <TagSectionWrapper>
@@ -10,39 +15,13 @@ export default function TagSection() {
         <TagSectionTitle>태그</TagSectionTitle>
       </TagSectionTitleWrapper>
       <TagGroup>
-        <TagButton>
-          <TagButtonText>디저트</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>다양한 태그</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>디저트</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>커피</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>다양한 태그</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>커피</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>다양한 태그</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>디저트</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>다양한 태그</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>디저트</TagButtonText>
-        </TagButton>
-        <TagButton>
-          <TagButtonText>커피</TagButtonText>
-        </TagButton>
+        {tagTextList.map((tag, index) => {
+          return (
+            <TagButton key={index}>
+              <TagButtonText>{tag}</TagButtonText>
+            </TagButton>
+          );
+        })}
       </TagGroup>
     </TagSectionWrapper>
   );
