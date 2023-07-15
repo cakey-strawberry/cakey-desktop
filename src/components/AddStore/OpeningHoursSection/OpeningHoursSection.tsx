@@ -14,6 +14,8 @@ import TimeRangeIcon from '@/common/assets/icons/time-range.svg';
 import HoursPlusIcon from '@/common/assets/icons/opening-hours-plus.svg';
 import HoursDeleteIcon from '@/common/assets/icons/opening-hours-delete.svg';
 
+const dayTextList = ['월', '화', '수', '목', '금', '토', '일'];
+
 export default function OpeningHoursSection() {
   return (
     <OpeningHoursSectionWrapper>
@@ -23,27 +25,13 @@ export default function OpeningHoursSection() {
       <OpeningHoursContent>
         <OpeningHoursSelector>
           <OpeningHoursDayList>
-            <OpeningHoursDayButton value="월">
-              <OpeningHoursDayButtonText>월</OpeningHoursDayButtonText>
-            </OpeningHoursDayButton>
-            <OpeningHoursDayButton value="화">
-              <OpeningHoursDayButtonText>화</OpeningHoursDayButtonText>
-            </OpeningHoursDayButton>
-            <OpeningHoursDayButton value="수">
-              <OpeningHoursDayButtonText>수</OpeningHoursDayButtonText>
-            </OpeningHoursDayButton>
-            <OpeningHoursDayButton value="목">
-              <OpeningHoursDayButtonText>목</OpeningHoursDayButtonText>
-            </OpeningHoursDayButton>
-            <OpeningHoursDayButton value="금">
-              <OpeningHoursDayButtonText>금</OpeningHoursDayButtonText>
-            </OpeningHoursDayButton>
-            <OpeningHoursDayButton value="토">
-              <OpeningHoursDayButtonText>토</OpeningHoursDayButtonText>
-            </OpeningHoursDayButton>
-            <OpeningHoursDayButton value="일">
-              <OpeningHoursDayButtonText>일</OpeningHoursDayButtonText>
-            </OpeningHoursDayButton>
+            {dayTextList.map((day, index) => {
+              return (
+                <OpeningHoursDayButton value={day} key={index}>
+                  <OpeningHoursDayButtonText>{day}</OpeningHoursDayButtonText>
+                </OpeningHoursDayButton>
+              );
+            })}
           </OpeningHoursDayList>
           <OpeningHoursTimeRange>
             <OpeningHoursTime
