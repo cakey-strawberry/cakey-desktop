@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
@@ -17,6 +17,7 @@ type HeaderProps = {
 
 export default function Header({ onUserProfileClick }: HeaderProps) {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <AppBar
@@ -31,66 +32,82 @@ export default function Header({ onUserProfileClick }: HeaderProps) {
         background: '#ffffff',
         boxShadow: 'none',
         transition: 'none',
+        // TODO: borderBottom 적용 시, 디자인과 달리 아래 border가 흰색 배경화면 양 끝에 닿지 않고 있음
+        // borderBottom: '1px solid #E9ECEF',
       }}
     >
       <Link href="/">
         <Image src={LogoIcon} alt="logo" />
       </Link>
-      <Search
-        onSearch={() => router.push('/store-search')}
-        placeholder="‘케이크 맛집’을 검색해보세요!"
-      />
-      <Box sx={{ display: 'flex' }}>
-        <Link
-          href="/add-store"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '40px',
-            backgroundColor: '#303034',
-            borderRadius: '30px',
-            padding: '10px',
-            marginRight: '4px',
-          }}
-        >
-          <Image
-            style={{ marginRight: '4px' }}
-            width={24}
-            height={24}
-            src={StorePlusIcon}
-            alt="user"
+      {
+        pathname !== '/add-store' &&
+        pathname !== '/add-store-recommendation' &&
+        pathname !== '/congratulation-add-store' &&
+        (
+          <Search
+            onSearch={() => router.push('/store-search')}
+            placeholder="‘케이크 맛집’을 검색해보세요!"
           />
-          스토어 추가
-        </Link>
-        <Link
-          href="/bookmarked-stores"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '40px',
-            height: '40px',
-            backgroundColor: '#303034',
-            borderRadius: '50%',
-            marginRight: '4px',
-          }}
-        >
-          <Image width={24} height={24} src={StarIcon} alt="user" />
-        </Link>
-        <Button
-          sx={{
-            minWidth: 0,
-            width: '40px',
-            height: '40px',
-            backgroundColor: '#303034',
-            borderRadius: '50%',
-          }}
-          onClick={onUserProfileClick}
-        >
-          <Image width={24} height={24} src={UserIcon} alt="user" />
-        </Button>
-      </Box>
+        )
+      }
+      {
+        pathname !== '/add-store' &&
+        pathname !== '/add-store-recommendation' &&
+        pathname !== '/congratulation-add-store' &&
+        (
+          <Box sx={{ display: 'flex' }}>
+            <Link
+              href="/add-store"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '40px',
+                backgroundColor: '#303034',
+                borderRadius: '30px',
+                padding: '10px',
+                marginRight: '4px',
+              }}
+            >
+              <Image
+                style={{ marginRight: '4px' }}
+                width={24}
+                height={24}
+                src={StorePlusIcon}
+                alt="user"
+              />
+              스토어 추가
+            </Link>
+            <Link
+              href="/bookmarked-stores"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '40px',
+                height: '40px',
+                backgroundColor: '#303034',
+                borderRadius: '50%',
+                marginRight: '4px',
+              }}
+            >
+              <Image width={24} height={24} src={StarIcon} alt="user" />
+            </Link>
+            <Button
+              sx={{
+                minWidth: 0,
+                width: '40px',
+                height: '40px',
+                backgroundColor: '#303034',
+                borderRadius: '50%',
+              }}
+              onClick={onUserProfileClick}
+            >
+              <Image width={24} height={24} src={UserIcon} alt="user" />
+            </Button>
+          </Box>
+        )
+      }
     </AppBar>
   );
 }
