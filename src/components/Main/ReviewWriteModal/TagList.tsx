@@ -10,8 +10,18 @@ import CloseIcon from '@/common/assets/icons/tag-close.svg';
 import type { Control } from 'react-hook-form';
 import type { ReviewWriteFormValues } from './hooks/useReviewForm';
 
-const dessertFirstRow = ['디저트', '커피', '케이크'];
-const dessertSecondRow = ['빵', '뷰 맛집', '아이스크림', '샐러드'];
+const TAGS = [
+  '디저트',
+  '커피',
+  '케이크',
+  '빵',
+  '뷰 맛집',
+  '아이스크림',
+  '샐러드',
+  '맛있는',
+  '달달한',
+  '배부른',
+];
 
 type TagListProps = {
   currentTags: string[];
@@ -48,52 +58,36 @@ export default function TagList({
         name="tags"
         control={control}
         render={({ field: { value } }) => (
-          <>
-            <Box sx={{ display: 'flex', marginBottom: '4px' }}>
-              {dessertFirstRow.map((dessert) => {
-                const isSelected = value.includes(dessert);
-                return (
-                  <Tag
-                    key={dessert}
-                    value={dessert}
-                    onClick={() => handleButtonClick(dessert)}
-                    isSelected={value.includes(dessert)}
-                  >
-                    {dessert}
-                    {isSelected && (
-                      <Image
-                        style={{ marginLeft: '8px', zIndex: 10 }}
-                        alt="tag close"
-                        src={CloseIcon}
-                      />
-                    )}
-                  </Tag>
-                );
-              })}
-            </Box>
-            <Box sx={{ display: 'flex' }}>
-              {dessertSecondRow.map((dessert) => {
-                const isSelected = value.includes(dessert);
-                return (
-                  <Tag
-                    key={dessert}
-                    value={dessert}
-                    onClick={() => handleButtonClick(dessert)}
-                    isSelected={value.includes(dessert)}
-                  >
-                    {dessert}
-                    {isSelected && (
-                      <Image
-                        style={{ marginLeft: '8px' }}
-                        alt="tag close"
-                        src={CloseIcon}
-                      />
-                    )}
-                  </Tag>
-                );
-              })}
-            </Box>
-          </>
+          <Box
+            sx={{
+              width: '350px',
+              display: 'flex',
+              marginBottom: '4px',
+              flexWrap: 'wrap',
+              gap: '4px 5px',
+            }}
+          >
+            {TAGS.map((dessert) => {
+              const isSelected = value.includes(dessert);
+              return (
+                <Tag
+                  key={dessert}
+                  value={dessert}
+                  onClick={() => handleButtonClick(dessert)}
+                  isSelected={value.includes(dessert)}
+                >
+                  {dessert}
+                  {isSelected && (
+                    <Image
+                      style={{ zIndex: 10 }}
+                      alt="tag close"
+                      src={CloseIcon}
+                    />
+                  )}
+                </Tag>
+              );
+            })}
+          </Box>
         )}
       />
     </TagListWrapper>
@@ -114,7 +108,6 @@ const Tag = styled(Button, {
   fontWeight: 500,
   color: isSelected ? '#FA3B5E' : '#6C757D',
   backgroundColor: isSelected ? 'rgba(250, 59, 94, 0.2)' : '#f8f9fa',
-  marginRight: '4px',
   '&:hover': {
     backgroundColor: isSelected ? 'rgba(250, 59, 94, 0.2)' : '#f8f9fa',
   },
