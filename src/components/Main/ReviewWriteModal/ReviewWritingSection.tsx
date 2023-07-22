@@ -31,7 +31,6 @@ export default function ReviewWritingSection({ control }: ReviewCommentProps) {
         multiline
         sx={{
           width: '100%',
-          marginBottom: 0,
           '& .MuiInputBase-root': {
             width: '100%',
             padding: '16px',
