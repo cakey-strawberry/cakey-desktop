@@ -6,8 +6,6 @@ export const CustomTextField = styled(TextField)({
   flexDirection: 'column',
   alignItems: 'flex-start',
   width: '400px',
-  height: '56px',
-  marginBottom: '60px',
 
   // NOTE: TextField의 'input 영역 + 아이콘 영역'을 감싸고 있는 div에 적용된 스타일
   '& .MuiInputBase-root': {
@@ -28,6 +26,9 @@ export const CustomTextField = styled(TextField)({
     '&.Mui-focused fieldset': {
       border: '2px solid #111111',
     },
+    '&.Mui-disabled fieldset': {
+      border: '1px solid #E9ECEF',
+    },
   },
   '& .MuiOutlinedInput-root.Mui-error': {
     '& fieldset': {
@@ -38,6 +39,9 @@ export const CustomTextField = styled(TextField)({
     },
     '&.Mui-focused fieldset': {
       border: '2px solid #FF5716',
+    },
+    '&.Mui-disabled fieldset': {
+      border: '1px solid #E9ECEF',
     },
   },
 
@@ -66,6 +70,9 @@ export const CustomTextField = styled(TextField)({
   '& .Mui-error .MuiInputBase-input': {
     color: '#FF5716',
   },
+  '& .Mui-disabled .MuiInputBase-input': {
+    color: '#E9ECEF',
+  },
 
   // NOTE: TextField의 'label 영역(테두리 위쪽에 걸쳐있는 작은 텍스트)'에 적용된 스타일
   '& .MuiFormLabel-root': {
@@ -81,6 +88,9 @@ export const CustomTextField = styled(TextField)({
   },
   '& .MuiFormLabel-root.Mui-error': {
     color: '#FF5716',
+  },
+  '& .MuiFormLabel-root.Mui-disabled': {
+    color: '#E9ECEF',
   },
 
   // NOTE: TextField의 'helperText 영역(테두리 하단에 표시되는 영역)'에 적용된 스타일

@@ -31,6 +31,8 @@ export default function Header({ onUserProfileClick }: HeaderProps) {
         background: '#ffffff',
         boxShadow: 'none',
         transition: 'none',
+        // TODO: borderBottom 적용 시, 디자인과 달리 아래 border가 흰색 배경화면 양 끝에 닿지 않고 있음
+        // borderBottom: '1px solid #E9ECEF',
       }}
     >
       <Link href="/">
@@ -42,7 +44,7 @@ export default function Header({ onUserProfileClick }: HeaderProps) {
       />
       <Box sx={{ display: 'flex' }}>
         <Link
-          href="/add-store"
+          href="/store-add"
           style={{
             display: 'flex',
             justifyContent: 'center',
