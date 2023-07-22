@@ -8,7 +8,7 @@ export type ReviewWriteFormValues = {
   comment: string;
 };
 
-const defaultValue: ReviewWriteFormValues = {
+const defaultValues: ReviewWriteFormValues = {
   tags: [],
   photos: [],
   comment: '',
@@ -17,7 +17,7 @@ const defaultValue: ReviewWriteFormValues = {
 export function useReviewForm() {
   const { control, handleSubmit, setValue, watch, reset } =
     useForm<ReviewWriteFormValues>({
-      values: defaultValue,
+      defaultValues,
     });
 
   function onsubmit(formValues: ReviewWriteFormValues) {
