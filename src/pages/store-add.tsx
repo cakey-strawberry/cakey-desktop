@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { styled, Box } from '@mui/material';
 
 import { ContentHeader } from '@/common/components/ContentHeader';
-import { StoreNameInput } from '@/components/AddStore/StoreNameInput';
-import { StoreAddressInput } from '@/components/AddStore/StoreAddressInput';
-import { OpeningHoursSection } from '@/components/AddStore/OpeningHoursSection';
-import { PhotoUploader } from '@/components/AddStore/PhotoUploader';
-import { TagSection } from '@/components/AddStore/TagSection';
-import { NextButton } from '@/components/AddStore/NextButton';
+import { StoreNameInput } from '@/components/StoreAdd/StoreNameInput';
+import { StoreAddressInput } from '@/components/StoreAdd/StoreAddressInput';
+import { OpeningHoursSection } from '@/components/StoreAdd/OpeningHoursSection';
+import { PhotoUploader } from '@/components/StoreAdd/PhotoUploader';
+import { TagSection } from '@/components/StoreAdd/TagSection';
+import { NextButton } from '@/components/StoreAdd/NextButton';
 
 export type FormValues = {
   storeName: string;
@@ -19,7 +19,7 @@ export type FormValues = {
   // tags?: string[];
 }
 
-export default function AddStore() {
+export default function StoreAdd() {
   const {
     handleSubmit,
     control,
@@ -40,7 +40,7 @@ export default function AddStore() {
   function onSubmit(formValues: FormValues) {
     // TODO: form value 확인용. api 연결 시 해당 console.log는 제거하기
     console.log(formValues);
-    router.push('/add-store-recommendation');
+    router.push('/store-recommendation-add');
   }
 
   return (

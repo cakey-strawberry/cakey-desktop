@@ -44,7 +44,7 @@ export default function Header({ onUserProfileClick }: HeaderProps) {
       />
       <Box sx={{ display: 'flex' }}>
         <Link
-          href="/add-store"
+          href="/store-add"
           style={{
             display: 'flex',
             justifyContent: 'center',

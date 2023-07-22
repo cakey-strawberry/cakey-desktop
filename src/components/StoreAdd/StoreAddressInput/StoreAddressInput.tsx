@@ -4,7 +4,7 @@ import { styled, Box, Typography } from '@mui/material';
 import { Input } from '@/common/components/Input';
 
 import type { Control } from 'react-hook-form';
-import type { FormValues } from '@/pages/add-store';
+import type { FormValues } from '@/pages/store-add';
 
 type StoreAddressInputProps = {
   control: Control<FormValues>;

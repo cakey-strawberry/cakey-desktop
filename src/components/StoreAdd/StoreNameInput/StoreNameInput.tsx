@@ -5,7 +5,7 @@ import { styled, Box, Typography } from '@mui/material';
 import { Input } from '@/common/components/Input';
 
 import type { Control } from 'react-hook-form';
-import type { FormValues } from '@/pages/add-store';
+import type { FormValues } from '@/pages/store-add';
 
 // NOTE: 20자 이내 영문 대소문자, 숫자 및 한글(자음, 모음, 완성형)만 허용 / 특수문자 제한
 const storeNameValidationPattern = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{1,20}$/;

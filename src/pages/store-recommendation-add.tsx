@@ -6,14 +6,14 @@ import { ContentHeader } from '@/common/components/ContentHeader';
 import { Button } from '@/common/components/Button';
 import {
   ReviewWritingSection,
-} from '@/components/AddStore/ReviewWritingSection';
-import { NextButton } from '@/components/AddStore/NextButton';
+} from '@/components/StoreAdd/ReviewWritingSection';
+import { NextButton } from '@/components/StoreAdd/NextButton';
 
 export type FormValues = {
   reviewContent: string;
 }
 
-export default function AddStoreRecommendation() {
+export default function StoreRecommendationAdd() {
   const {
     handleSubmit,
     control,
@@ -29,7 +29,7 @@ export default function AddStoreRecommendation() {
   function onSubmit(formValues: FormValues) {
     // TODO: form value 확인용. api 연결 시 해당 console.log는 제거하기
     console.log(formValues);
-    router.push('/congratulation-add-store');
+    router.push('/congratulation-store-add');
   }
 
   return (
@@ -43,7 +43,7 @@ export default function AddStoreRecommendation() {
           <ReviewWritingSection control={control} />
           <ButtonWrapper>
             <SkipButton
-              onClick={() => router.push('/congratulation-add-store')}
+              onClick={() => router.push('/congratulation-store-add')}
             >
               건너뛰기
             </SkipButton>

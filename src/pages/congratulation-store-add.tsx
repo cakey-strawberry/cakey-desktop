@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 
 import { CongratulationCard } from '@/components/Misc/CongratulationCard';
 
-export default function CongratulationAddStore() {
+export default function CongratulationStoreAdd() {
   const router = useRouter();
 
   function handleButtonClick() {
