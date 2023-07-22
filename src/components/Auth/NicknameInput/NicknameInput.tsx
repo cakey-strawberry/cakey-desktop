@@ -87,6 +87,10 @@ export default function NicknameInput({ control }: NicknameInputProps) {
         endAdornment: endIcon,
       }}
       InputLabelProps={{ shrink: true }}
+      sx={{
+        height: '56px',
+        marginBottom: '60px',
+      }}
     />
   );
 }
