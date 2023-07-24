@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Button } from '@/common/components/Button';
 import { Dialog } from '@/common/components/Dialog';
 
@@ -7,8 +5,7 @@ import TagList from './TagList';
 import StoreInfoSection from './StoreInfoSection';
 import AddingPhoto from './PhotoUploader';
 import ReviewWritingSection from './ReviewWritingSection';
-
-import type { ChangeEvent } from 'react';
+import { useReviewForm } from './hooks/useReviewForm';
 
 type ReviewWriteModalProps = {
   isOpen: boolean;
@@ -19,11 +16,14 @@ export default function ReviewWriteModal({
   isOpen,
   onCloseButtonClick,
 }: ReviewWriteModalProps) {
-  const [reviewContent, setReviewContent] = useState<string>('');
-
-  function handleReviewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    setReviewContent(event.target.value);
-  }
+  const {
+    control,
+    currentValue,
+    submitDisabled,
+    handleSubmit,
+    handleTagChange,
+    handlePhotoChange,
+  } = useReviewForm();
 
   return (
     <Dialog.Wrapper
@@ -32,43 +32,51 @@ export default function ReviewWriteModal({
       open={isOpen}
       onClose={onCloseButtonClick}
     >
-      <Dialog.Content
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignContent: 'center',
-          marginTop: '8px',
-        }}
-      >
-        <StoreInfoSection />
-        <ReviewWritingSection
-          value={reviewContent}
-          onTextFieldChange={handleReviewCommentChange}
-        />
-        <AddingPhoto />
-        <TagList />
-      </Dialog.Content>
-      <Dialog.Actions
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        <Button
+      <form onSubmit={handleSubmit}>
+        <Dialog.Content
           sx={{
-            width: '100%',
-            height: '56px',
-            fontSize: '16px',
-            color: '#b4b9bc',
-            backgroundColor: '#e9ecef',
-            borderRadius: '100px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignContent: 'center',
+            marginTop: '8px',
           }}
         >
-          리뷰 쓰기 완료
-        </Button>
-      </Dialog.Actions>
+          <StoreInfoSection />
+          <ReviewWritingSection control={control} />
+          <AddingPhoto control={control} onChange={handlePhotoChange} />
+          <TagList
+            currentTags={currentValue.tags}
+            onChange={handleTagChange}
+            control={control}
+          />
+        </Dialog.Content>
+        <Dialog.Actions
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          <Button
+            type="submit"
+            disabled={submitDisabled}
+            sx={{
+              width: '100%',
+              height: '56px',
+              fontSize: '16px',
+              color: submitDisabled ? '#495057' : '#FFFFFF',
+              backgroundColor: submitDisabled ? '#E9ECEF' : '#FF5775',
+              borderRadius: '100px',
+              '&:hover': {
+                backgroundColor: submitDisabled ? '#E9ECEF' : '#FF5775',
+              },
+            }}
+          >
+            리뷰 쓰기 완료
+          </Button>
+        </Dialog.Actions>
+      </form>
     </Dialog.Wrapper>
   );
 }
