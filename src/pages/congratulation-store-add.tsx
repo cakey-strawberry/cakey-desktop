@@ -7,7 +7,7 @@ import { NextButton } from '@/components/Auth/NextButton';
 import CongratulationImage
   from '@/common/assets/icons/congratulation-check.svg';
 
-export default function CongratulationSignUp() {
+export default function CongratulationStoreAdd() {
   const router = useRouter();
 
   function handleButtonClick() {
