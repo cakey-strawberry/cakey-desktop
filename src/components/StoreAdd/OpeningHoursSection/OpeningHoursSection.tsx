@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import {
   styled,
   Box,
   Typography,
   ToggleButton,
-  TextField,
   Divider,
 } from '@mui/material';
 
@@ -21,6 +20,11 @@ import type { Day } from './day';
 
 export default function OpeningHoursSection() {
   const [days, setDays] = useState<Day[]>(DEFAULT_DAYS);
+  const [openHour, setOpenHour] = useState<string>('');
+  const [closeHour, setCloseHour] = useState<string>('');
+
+  const openHourInputRef = useRef<HTMLInputElement>(null);
+  const closeHourInputRef = useRef<HTMLInputElement>(null);
 
   function handleDayToggle(dayId: number) {
     setDays((prevDays) => {
@@ -32,6 +36,20 @@ export default function OpeningHoursSection() {
         }
       });
     });
+  }
+
+  function handleOpenHourInputClick() {
+    openHourInputRef.current?.showPicker();
+  }
+  function handleOpenHourChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setOpenHour(event.target.value);
+  }
+
+  function handleCloseHourInputClick() {
+    closeHourInputRef.current?.showPicker();
+  }
+  function handleCloseHourChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setCloseHour(event.target.value);
   }
 
   return (
@@ -58,22 +76,36 @@ export default function OpeningHoursSection() {
             })}
           </OpeningHoursDayList>
           <OpeningHoursTimeRange>
-            <OpeningHoursTime
-              placeholder="09:00"
-              fullWidth
-              autoComplete="off"
-            />
+            <TimeInputBox onClick={handleOpenHourInputClick}>
+              {openHour
+                ? <TimeInputText>{openHour}</TimeInputText>
+                : <TimeInputPlaceholderText>09:00</TimeInputPlaceholderText>
+              }
+              <HiddenTimeInput
+                ref={openHourInputRef}
+                type="time"
+                value={openHour}
+                onChange={handleOpenHourChange}
+              />
+            </TimeInputBox>
             <Image
               src={TimeRangeIcon}
               alt="time range icon"
               width={24}
               height={24}
             />
-            <OpeningHoursTime
-              placeholder="18:00"
-              fullWidth
-              autoComplete="off"
-            />
+            <TimeInputBox onClick={handleCloseHourInputClick}>
+              {closeHour
+                ? <TimeInputText>{closeHour}</TimeInputText>
+                : <TimeInputPlaceholderText>18:00</TimeInputPlaceholderText>
+              }
+              <HiddenTimeInput
+                ref={closeHourInputRef}
+                type="time"
+                value={closeHour}
+                onChange={handleCloseHourChange}
+              />
+            </TimeInputBox>
           </OpeningHoursTimeRange>
           <ClosedDayCheckboxWrapper>
             <Checkbox
@@ -243,60 +275,48 @@ const OpeningHoursTimeRange = styled(Box)({
   gap: '12px',
 });
 
-// TODO: 다른 시간 선택 컴포넌트로 대체될 때 해당 styled 컴포넌트 제거
-const OpeningHoursTime = styled(TextField)({
+const TimeInputBox = styled(Box)({
+  position: 'relative',
   display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  width: '400px',
+  alignItems: 'center',
+  padding: '8px 0px 8px 16px',
+  width: '176px',
   height: '56px',
+  border: '1px solid #6C757D',
+  borderRadius: '4px',
+  cursor: 'pointer',
 
-  // NOTE: TextField의 'input 영역 + 아이콘 영역'을 감싸고 있는 div에 적용된 스타일
-  '& .MuiInputBase-root': {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: '8px 0px 8px 16px',
+  '&:hover': {
+    border: '2px solid #111111',
   },
+});
 
-  // NOTE: TextField의 'input 영역 + 아이콘 영역'을 감싸고 있는 div의 테두리에 적용된 스타일
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#6C757D',
-    },
-    '&:hover fieldset': {
-      border: '2px solid #111111',
-    },
-    '&.Mui-focused fieldset': {
-      border: '2px solid #111111',
-    },
-    '&.Mui-disabled fieldset': {
-      border: '1px solid #E9ECEF',
-    },
-  },
+const TimeInputText = styled(Typography)({
+  fontFamily: 'Pretendard',
+  fontWeight: 400,
+  fontSize: '16px',
+  lineHeight: '24px',
+  letterSpacing: '0.5px',
+  color: '#111111',
+});
 
-  // NOTE: TextField의 'input 영역(아이콘 영역을 제외한 영역)'에 적용된 스타일
-  '& .MuiInputBase-input': {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: '0px',
-    isolation: 'isolate',
-    width: '336px',
-    height: '40px',
+const TimeInputPlaceholderText = styled(Typography)({
+  fontFamily: 'Pretendard',
+  fontWeight: 400,
+  fontSize: '16px',
+  lineHeight: '24px',
+  letterSpacing: '0.5px',
+  color: '#ADB5BD',
+});
 
-    fontFamily: 'Pretendard',
-    fontWeight: 400,
-    fontSize: '16px',
-    lineHeight: '24px',
-    letterSpacing: '0.5px',
-
-    color: '#6C757D',
-  },
-  '& .Mui-focused .MuiInputBase-input': {
-    color: '#111111',
-  },
+const HiddenTimeInput = styled('input')({
+  opacity: 0,
+  position: 'absolute',
+  height: '1px',
+  width: '1px',
+  top: '100%',
+  left: '0%',
+  pointerEvents: 'none',
 });
 
 const ClosedDayCheckboxWrapper = styled(Box)({
