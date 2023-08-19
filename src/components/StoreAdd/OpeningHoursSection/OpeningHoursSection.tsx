@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import {
   styled,
@@ -14,9 +15,25 @@ import TimeRangeIcon from '@/common/assets/icons/time-range.svg';
 import HoursPlusIcon from '@/common/assets/icons/opening-hours-plus.svg';
 import HoursDeleteIcon from '@/common/assets/icons/opening-hours-delete.svg';
 
-const dayTextList = ['월', '화', '수', '목', '금', '토', '일'];
+import { DEFAULT_DAYS } from './day';
+
+import type { Day } from './day';
 
 export default function OpeningHoursSection() {
+  const [days, setDays] = useState<Day[]>(DEFAULT_DAYS);
+
+  function handleDayToggle(dayId: number) {
+    setDays((prevDays) => {
+      return prevDays.map((day) => {
+        if (day.id === dayId) {
+          return { ...day, isSelected: !day.isSelected };
+        } else {
+          return day;
+        }
+      });
+    });
+  }
+
   return (
     <OpeningHoursSectionWrapper>
       <OpeningHoursSectionTitleWrapper>
@@ -25,10 +42,17 @@ export default function OpeningHoursSection() {
       <OpeningHoursContent>
         <OpeningHoursSelector>
           <OpeningHoursDayList>
-            {dayTextList.map((day, index) => {
+            {days.map((day: Day) => {
               return (
-                <OpeningHoursDayButton value={day} key={index}>
-                  <OpeningHoursDayButtonText>{day}</OpeningHoursDayButtonText>
+                <OpeningHoursDayButton
+                  value={day.name}
+                  key={day.id}
+                  selected={day.isSelected}
+                  onChange={() => handleDayToggle(day.id)}
+                >
+                  <OpeningHoursDayButtonText>
+                    {day.name}
+                  </OpeningHoursDayButtonText>
                 </OpeningHoursDayButton>
               );
             })}
@@ -190,6 +214,16 @@ const OpeningHoursDayButton = styled(ToggleButton)({
   border: 'none',
   borderRadius: '8px',
   background: '#F8F9FA',
+
+  '&.Mui-selected': {
+    border: '1px solid #FA3B5E',
+    background: 'rgba(255, 153, 171, 0.20)',
+
+    // NOTE: selected 상태일 때 ToggleButton 내부의 모든 자식 요소에 대한 스타일
+    '& > *': {
+      color: '#FA3B5E',
+    },
+  },
 });
 
 const OpeningHoursDayButtonText = styled(Typography)({
