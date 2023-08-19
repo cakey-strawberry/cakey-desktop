@@ -22,6 +22,7 @@ export default function OpeningHoursSection() {
   const [days, setDays] = useState<Day[]>(DEFAULT_DAYS);
   const [openHour, setOpenHour] = useState<string>('');
   const [closeHour, setCloseHour] = useState<string>('');
+  const [isClosedDay, setIsClosedDay] = useState<boolean>(false);
 
   const openHourInputRef = useRef<HTMLInputElement>(null);
   const closeHourInputRef = useRef<HTMLInputElement>(null);
@@ -50,6 +51,10 @@ export default function OpeningHoursSection() {
   }
   function handleCloseHourChange(event: React.ChangeEvent<HTMLInputElement>) {
     setCloseHour(event.target.value);
+  }
+
+  function handleClosedDayChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setIsClosedDay(event.target.checked);
   }
 
   return (
@@ -109,6 +114,8 @@ export default function OpeningHoursSection() {
           </OpeningHoursTimeRange>
           <ClosedDayCheckboxWrapper>
             <Checkbox
+              checked={isClosedDay}
+              onChange={handleClosedDayChange}
               sx={{
                 width: '24px',
                 height: '24px',
