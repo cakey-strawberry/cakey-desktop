@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import {
   styled,
@@ -12,17 +12,30 @@ import { Checkbox } from '@/common/components/Checkbox';
 import { Button } from '@/common/components/Button';
 import TimeRangeIcon from '@/common/assets/icons/time-range.svg';
 import HoursPlusIcon from '@/common/assets/icons/opening-hours-plus.svg';
+import DisabledHoursPlusIcon
+  from '@/common/assets/icons/disabled-opening-hours-plus.svg';
 import HoursDeleteIcon from '@/common/assets/icons/opening-hours-delete.svg';
 
 import { DEFAULT_DAYS } from './day';
 
 import type { Day } from './day';
 
+const MIDDLE_DOT = '·';
+
+// TODO: api 적용할 때 영업시간을 추가하고 제거하는 로직 상위로 올리기 (hook)
 export default function OpeningHoursSection() {
   const [days, setDays] = useState<Day[]>(DEFAULT_DAYS);
   const [openHour, setOpenHour] = useState<string>('');
   const [closeHour, setCloseHour] = useState<string>('');
   const [isClosedDay, setIsClosedDay] = useState<boolean>(false);
+  const [isAddButtonActive, setIsAddButtonActive] = useState<boolean>(false);
+  const [openingHoursList, setOpeningHoursList] = useState<Array<{
+    id: number;
+    days: Day[];
+    openHour: string;
+    closeHour: string;
+    isClosedDay: boolean;
+  }>>([]);
 
   const openHourInputRef = useRef<HTMLInputElement>(null);
   const closeHourInputRef = useRef<HTMLInputElement>(null);
@@ -57,6 +70,61 @@ export default function OpeningHoursSection() {
     setIsClosedDay(event.target.checked);
   }
 
+  function handleOpeningHoursAddButtonClick() {
+    const selectedDays = days.filter((day) => day.isSelected);
+
+    setOpeningHoursList((prevHoursList) => [
+      ...prevHoursList,
+      {
+        id: prevHoursList.length + 1,
+        days: selectedDays,
+        openHour,
+        closeHour,
+        isClosedDay,
+      },
+    ]);
+
+    setDays((prevDays) => {
+      return prevDays.map((day) => {
+        if (selectedDays.some((selectedDay) => selectedDay.id === day.id)) {
+          return { ...day, isSelected: false, isDisabled: true };
+        } else {
+          return { ...day, isSelected: false };
+        }
+      });
+    });
+
+    setOpenHour('');
+    setCloseHour('');
+    setIsClosedDay(false);
+  }
+
+  function handleOpeningHourDeleteButtonClick(hourId: number) {
+    const openingHourToDelete =
+      openingHoursList.find((hour) => hour.id === hourId);
+    const enabledDayIdList =
+      openingHourToDelete ? openingHourToDelete.days.map((day) => day.id) : [];
+    const filterdHoursList =
+      openingHoursList.filter((hour) => hour.id !== hourId);
+
+    setDays((prevDays) => prevDays.map((day) => {
+      if (enabledDayIdList.includes(day.id)) {
+        return { ...day, isDisabled: false };
+      }
+      return day;
+    }));
+    setOpeningHoursList(filterdHoursList);
+  }
+
+  useEffect(() => {
+    const isAnyDaySelected = days.some((day) => day.isSelected);
+    const areOpenAndCloseHoursSelected = Boolean(openHour && closeHour);
+    const isAddButtonActive =
+    isAnyDaySelected && (areOpenAndCloseHoursSelected || isClosedDay);
+
+    setIsAddButtonActive(isAddButtonActive);
+  }, [days, openHour, closeHour, isClosedDay]);
+
   return (
     <OpeningHoursSectionWrapper>
       <OpeningHoursSectionTitleWrapper>
@@ -71,6 +139,7 @@ export default function OpeningHoursSection() {
                   value={day.name}
                   key={day.id}
                   selected={day.isSelected}
+                  disabled={day.isDisabled}
                   onChange={() => handleDayToggle(day.id)}
                 >
                   <OpeningHoursDayButtonText>
@@ -123,15 +192,27 @@ export default function OpeningHoursSection() {
             />
             <ClosedDayCheckboxLabelText>휴무일 지정</ClosedDayCheckboxLabelText>
           </ClosedDayCheckboxWrapper>
-          <OpeningHoursAddButton>
+          <OpeningHoursAddButton
+            disabled={!isAddButtonActive}
+            onClick={handleOpeningHoursAddButtonClick}
+            sx={{
+              border:
+                isAddButtonActive ? '1px solid #FF99AB' : '1px solid #E9ECEF',
+            }}
+          >
             <OpeningHoursAddButtonTextWrapper>
               <Image
-                src={HoursPlusIcon}
+                src={isAddButtonActive ? HoursPlusIcon : DisabledHoursPlusIcon}
                 alt="opening hours add icon"
                 width={24}
                 height={24}
               />
-              <OpeningHoursAddButtonText>
+              <OpeningHoursAddButtonText
+                sx={{
+                  color: isAddButtonActive ? '#FF5775' : '#495057',
+                  opacity: isAddButtonActive ? 1 : 0.37,
+                }}
+              >
                 영업시간 추가
               </OpeningHoursAddButtonText>
             </OpeningHoursAddButtonTextWrapper>
@@ -144,52 +225,39 @@ export default function OpeningHoursSection() {
           }}
         />
         <OpeningHoursList>
-          <OpeningHoursItem>
-            <Box
-              sx={{
-                display: 'flex',
-                flex: 1,
-                justifyContent: 'space-between',
-                height: '24px',
-              }}
-            >
-              <OpeningHoursItemDays>
-                월 &middot; 화 &middot; 수
-              </OpeningHoursItemDays>
-              <OpeningHoursItemTime>09:00 - 18:00</OpeningHoursItemTime>
-            </Box>
-            <Button sx={{ padding: '0px' }}>
-              <Image
-                src={HoursDeleteIcon}
-                alt="opening hours delete icon"
-                width={24}
-                height={24}
-              />
-            </Button>
-          </OpeningHoursItem>
-          <OpeningHoursItem>
-            <Box
-              sx={{
-                display: 'flex',
-                flex: 1,
-                justifyContent: 'space-between',
-                height: '24px',
-              }}
-            >
-              <OpeningHoursItemDays>
-                목 &middot; 금
-              </OpeningHoursItemDays>
-              <OpeningHoursItemClosedDay>휴무</OpeningHoursItemClosedDay>
-            </Box>
-            <Button sx={{ padding: '0px' }}>
-              <Image
-                src={HoursDeleteIcon}
-                alt="opening hours delete icon"
-                width={24}
-                height={24}
-              />
-            </Button>
-          </OpeningHoursItem>
+          {openingHoursList.map((item) => (
+            <OpeningHoursItem key={item.id}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flex: 1,
+                  justifyContent: 'space-between',
+                  height: '24px',
+                }}
+              >
+                <OpeningHoursItemDays>
+                  {item.days.map((day) => day.name).join(` ${MIDDLE_DOT} `)}
+                </OpeningHoursItemDays>
+                {item.isClosedDay
+                  ? <OpeningHoursItemClosedDay>휴무</OpeningHoursItemClosedDay> :
+                  <OpeningHoursItemTime>
+                    {item.openHour} - {item.closeHour}
+                  </OpeningHoursItemTime>
+                }
+              </Box>
+              <Button
+                onClick={() => handleOpeningHourDeleteButtonClick(item.id)}
+                sx={{ padding: '0px' }}
+              >
+                <Image
+                  src={HoursDeleteIcon}
+                  alt="opening hours delete icon"
+                  width={24}
+                  height={24}
+                />
+              </Button>
+            </OpeningHoursItem>
+          ))}
         </OpeningHoursList>
       </OpeningHoursContent>
     </OpeningHoursSectionWrapper>
@@ -261,6 +329,16 @@ const OpeningHoursDayButton = styled(ToggleButton)({
     // NOTE: selected 상태일 때 ToggleButton 내부의 모든 자식 요소에 대한 스타일
     '& > *': {
       color: '#FA3B5E',
+    },
+  },
+
+  '&:disabled': {
+    background: '#FA3B5E',
+    color: '#FFFFFF',
+
+    // NOTE: disabled 상태일 때 ToggleButton 내부의 모든 자식 요소에 대한 스타일
+    '& > *': {
+      color: '#FFFFFF',
     },
   },
 });
@@ -354,7 +432,6 @@ const OpeningHoursAddButton = styled(Button)({
   padding: '0px',
   gap: '8px',
   borderRadius: '100px',
-  border: '1px solid #FF99AB',
   width: '400px',
   height: '40px',
 });
@@ -373,7 +450,6 @@ const OpeningHoursAddButtonText = styled(Typography)({
   fontWeight: '500',
   lineHeight: 'normal',
   letterSpacing: '0.1px',
-  color: '#FF5775',
   textAlign: 'center',
 });
 
