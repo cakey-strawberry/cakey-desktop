@@ -95,7 +95,13 @@ export default function ProfileSignUp() {
         <Box id="content">
           <form onSubmit={handleSubmit(onSubmit)}>
             <ProfileImage control={control} />
-            <NicknameInput control={control} />
+            <NicknameInput
+              control={control}
+              sx={{
+                height: '56px',
+                marginBottom: '60px',
+              }}
+            />
             <NextButton type="submit" text="가입하기" disabled={!isValid} />
           </form>
         </Box>
