@@ -64,7 +64,7 @@ const StoreAddressInputTitle = styled(Typography)({
    * TODO: 글자색이 배경색과 동일한 색으로 적용되어 글자가 안보이는 현상있어 일단 명시적으로 텍스트 색깔 적용
    * 전체적으로 default color 토큰 지정하는 작업 후 제거하기
    */
-  color: '#111',
+  color: '#111111',
 });
 
 const RequiredFieldIndicator = styled(Typography)({

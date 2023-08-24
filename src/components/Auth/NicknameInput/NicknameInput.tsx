@@ -9,6 +9,7 @@ import WarningIcon from '@/common/assets/icons/input-warning.svg';
 
 import type { ReactNode } from 'react';
 import type { Control } from 'react-hook-form';
+import type { SxProps } from '@mui/material/styles';
 import type { FormValues } from '@/pages/profile-sign-up';
 
 // NOTE: 2~8자 영문 대소문자, 숫자 및 한글(완성형)만 허용
@@ -16,9 +17,10 @@ const nicknameValidationPattern = /^[a-zA-Z0-9가-힣]{2,8}$/;
 
 type NicknameInputProps = {
   control: Control<FormValues>;
+  sx?: SxProps;
 };
 
-export default function NicknameInput({ control }: NicknameInputProps) {
+export default function NicknameInput({ control, sx }: NicknameInputProps) {
   const [endIcon, setEndIcon] = useState<ReactNode>(null);
   const [helperText, setHelperText] = useState<string>('');
   const {
@@ -87,10 +89,7 @@ export default function NicknameInput({ control }: NicknameInputProps) {
         endAdornment: endIcon,
       }}
       InputLabelProps={{ shrink: true }}
-      sx={{
-        height: '56px',
-        marginBottom: '60px',
-      }}
+      sx={sx}
     />
   );
 }
