@@ -5,7 +5,16 @@ import { Button } from '@/common/components/Button';
 
 export default function Settings() {
   const router = useRouter();
-  // TODO: 각 버튼에 맞는 기능 추가(로그아웃, 탈퇴)
+
+  // TODO: 각 버튼에 맞는 기능 추가(로그아웃)
+  function handleLogoutButtonClick() {
+    router.push('/');
+  }
+
+  // TODO: 각 버튼에 맞는 기능 추가(탈퇴)
+  function handleDeleteAccountButtonClick() {
+    router.push('/');
+  }
 
   return (
     <>
@@ -18,10 +27,10 @@ export default function Settings() {
             <VersionLabel>버전</VersionLabel>
             <VersionNumber>v.1.0</VersionNumber>
           </VersionInfoWrapper>
-          <LogoutButton onClick={() => router.push('/')}>
+          <LogoutButton onClick={handleLogoutButtonClick}>
             <LogoutButtonText>로그아웃</LogoutButtonText>
           </LogoutButton>
-          <DeleteAccountButton onClick={() => router.push('/')}>
+          <DeleteAccountButton onClick={handleDeleteAccountButtonClick}>
             <DeleteAccountButtonText>탈퇴하기</DeleteAccountButtonText>
           </DeleteAccountButton>
         </PageContent>
