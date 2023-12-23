@@ -5,7 +5,7 @@ import { styled, Box } from '@mui/material';
 import { ContentHeader } from '@/common/components/ContentHeader';
 import { StoreNameInput } from '@/components/StoreAdd/StoreNameInput';
 import { StoreAddressInput } from '@/components/StoreAdd/StoreAddressInput';
-import { OpeningHoursSection } from '@/components/StoreAdd/OpeningHoursSection';
+import { OpeningHourSection } from '@/components/StoreAdd/OpeningHourSection';
 import { PhotoUploader } from '@/components/StoreAdd/PhotoUploader';
 import { TagSection } from '@/components/StoreAdd/TagSection';
 import { NextButton } from '@/components/StoreAdd/NextButton';
@@ -53,7 +53,7 @@ export default function StoreAdd() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <StoreNameInput control={control} />
           <StoreAddressInput control={control} />
-          <OpeningHoursSection />
+          <OpeningHourSection />
           <PhotoUploader />
           <TagSection />
           <NextButton type="submit" text="등록하기" disabled={!isValid} />
