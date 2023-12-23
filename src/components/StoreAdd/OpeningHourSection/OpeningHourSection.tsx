@@ -134,7 +134,7 @@ export default function OpeningHourSection() {
       <OpeningHourContent>
         <OpeningHourSelector>
           <OpeningHourDayList>
-            {days.map((day: Day) => {
+            {days.map((day) => {
               return (
                 <OpeningHourDayButton
                   value={day.name}
