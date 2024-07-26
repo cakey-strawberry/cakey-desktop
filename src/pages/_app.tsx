@@ -1,12 +1,15 @@
+import '@/styles/globals.css';
+
 import { useRouter } from 'next/navigation';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { Layout } from '@/common/components/Layout';
 import { NeedSignUpModal } from '@/components/Auth/NeedSignUpModal';
 import { useModal } from '@/common/hooks/useModal';
 
-import '@/styles/globals.css';
-
 import type { AppProps } from 'next/app';
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -22,10 +25,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Layout onUserProfileClick={handleUserProfileClick}>
-        <Component {...pageProps} />
-        {isOpen && <NeedSignUpModal onCloseButtonClick={closeModal} />}
-      </Layout>
+      <QueryClientProvider client={queryClient}>
+        <Layout onUserProfileClick={handleUserProfileClick}>
+          <Component {...pageProps} />
+          {isOpen && <NeedSignUpModal onCloseButtonClick={closeModal} />}
+        </Layout>
+      </QueryClientProvider>
     </>
   );
 }
