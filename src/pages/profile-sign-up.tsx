@@ -2,22 +2,26 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { Box, Typography } from '@mui/material';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
 import { NicknameInput } from '@/components/Auth/NicknameInput';
 import { ProfileImage } from '@/components/Auth/ProfileImage';
 import { NextButton } from '@/components/Auth/NextButton';
 import LogoCakeIcon from '@/common/assets/icons/logo-cake.svg';
-import { socialUserInfoAtom } from '@/common/store/atoms/authAtom';
+import { authAtom, socialUserInfoAtom } from '@/common/store/atoms/authAtom';
+import { useSignUp } from '@/common/queries/useSignUp';
+import { JWT } from '@/common/service/jwt';
 
 export type FormValues = {
-  profileImage: null | string;
+  profileImage: string;
   nickname: string;
 };
 
 export default function ProfileSignUp() {
+  const setAuthState = useSetAtom(authAtom);
   const socialUserInfo = useAtomValue(socialUserInfoAtom);
+  const signUpQuery = useSignUp();
 
   const {
     handleSubmit,
@@ -28,7 +32,9 @@ export default function ProfileSignUp() {
     mode: 'onChange',
     defaultValues: {
       profileImage: socialUserInfo?.avatar,
-      nickname: socialUserInfo?.name.replace(/\s+/g, ''),
+      nickname: socialUserInfo?.name
+        ? socialUserInfo?.name.replace(/\s+/g, '')
+        : '',
     },
   });
   const router = useRouter();
@@ -36,7 +42,40 @@ export default function ProfileSignUp() {
   function onSubmit(formValues: FormValues) {
     // TODO: form value 확인용. api 연결 시 해당 console.log는 제거하기
     console.log(formValues);
-    router.push('/congratulation-sign-up');
+
+    if (!socialUserInfo) {
+      return;
+    } else {
+      signUpQuery.mutate(
+        {
+          id: socialUserInfo.id,
+          avatar: formValues.profileImage,
+          name: formValues.nickname,
+          oauthProvider: socialUserInfo.oauthProvider,
+        },
+        {
+          onSuccess: ({ data }) => {
+            JWT.setCredentials({
+              accessToken: data.accessToken,
+              refreshToken: data.refreshToken,
+            });
+
+            setAuthState(true);
+
+            router.push('/congratulation-sign-up');
+          },
+          onError: () => {
+            /**
+             * @TODO
+             * UI 상으로 에러를 보여주어야 합니다.
+             * ex) alert('로그인에 실패했습니다.');
+             */
+
+            router.push('/congratulation-sign-up');
+          },
+        },
+      );
+    }
   }
 
   /**

@@ -36,11 +36,6 @@ export default function NeedSignUpModal({
   const setAuthState = useSetAtom(authAtom);
   const setSocialUserInfo = useSetAtom(socialUserInfoAtom);
 
-  function setTokens({ accessToken, refreshToken }: SetTokensParams) {
-    JWT.setAccessToken(accessToken);
-    JWT.setRefreshToken(refreshToken);
-  }
-
   const login = useGoogleLogin({
     flow: 'auth-code',
     /**
@@ -64,7 +59,7 @@ export default function NeedSignUpModal({
               router.push('/privacy-terms-sign-up');
               return;
             } else {
-              setTokens({
+              JWT.setCredentials({
                 accessToken: data.accessToken,
                 refreshToken: data.refreshToken,
               });
