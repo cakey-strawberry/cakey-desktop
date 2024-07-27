@@ -10,7 +10,7 @@ import GoogleIcon from '@/common/assets/icons/google.svg';
 import { useGoogleSocialLogin } from '@/common/queries/useGoogleSocialLogin';
 import { isGuestData } from '@/common/repositories/auth/types';
 import { JWT } from '@/common/service/jwt';
-import { authAtom } from '@/common/store/atoms/authAtom';
+import { authAtom, socialUserInfoAtom } from '@/common/store/atoms/authAtom';
 
 import {
   GoogleLoginButton,
@@ -34,6 +34,7 @@ export default function NeedSignUpModal({
   const router = useRouter();
   const socialLoginQuery = useGoogleSocialLogin();
   const setAuthState = useSetAtom(authAtom);
+  const setSocialUserInfo = useSetAtom(socialUserInfoAtom);
 
   function setTokens({ accessToken, refreshToken }: SetTokensParams) {
     JWT.setAccessToken(accessToken);
@@ -57,6 +58,9 @@ export default function NeedSignUpModal({
           onSuccess: ({ data }) => {
             if (isGuestData(data)) {
               onCloseButtonClick();
+              const { socialUserInfo } = data;
+              setSocialUserInfo(socialUserInfo);
+
               router.push('/privacy-terms-sign-up');
               return;
             } else {

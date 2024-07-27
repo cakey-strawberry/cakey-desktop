@@ -8,12 +8,14 @@ type SignedUserData = {
 };
 
 type GuestData = {
-  socialUserInfo: {
-    avatar: string;
-    id: string;
-    name: string;
-    oauthProvider: 'Google' | 'Kakao';
-  };
+  socialUserInfo: SocialUserInfo;
+};
+
+export type SocialUserInfo = {
+  avatar: string;
+  id: string;
+  name: string;
+  oauthProvider: 'Google' | 'Kakao';
 };
 
 export function isGuestData(
