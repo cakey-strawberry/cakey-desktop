@@ -23,11 +23,6 @@ type NeedSignUpModalProps = {
   onCloseButtonClick: () => void;
 };
 
-type SetTokensParams = {
-  accessToken: string;
-  refreshToken: string;
-};
-
 export default function NeedSignUpModal({
   onCloseButtonClick,
 }: NeedSignUpModalProps) {
