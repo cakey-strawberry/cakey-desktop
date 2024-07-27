@@ -31,9 +31,9 @@ const TermsCheckboxList = styled(Box)({
 });
 
 export type FormValues = {
-  locationConsent: boolean,
-  serviceConsent: boolean,
-}
+  locationConsent: boolean;
+  serviceConsent: boolean;
+};
 
 export default function PrivacyTermsSignUp() {
   const [isAllConsentChecked, setIsAllConsentChecked] = useState(false);
@@ -59,8 +59,9 @@ export default function PrivacyTermsSignUp() {
   const router = useRouter();
 
   useEffect(() => {
-    const isEveryConsentChecked = Object.values(consentValues)
-        .every((consent: boolean) => consent);
+    const isEveryConsentChecked = Object.values(consentValues).every(
+      (consent: boolean) => consent,
+    );
 
     if (isEveryConsentChecked !== isAllConsentChecked) {
       setIsAllConsentChecked(isEveryConsentChecked);

@@ -2,24 +2,34 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { Box, Typography } from '@mui/material';
+import { useAtomValue } from 'jotai';
+import { useEffect } from 'react';
 
 import { NicknameInput } from '@/components/Auth/NicknameInput';
 import { ProfileImage } from '@/components/Auth/ProfileImage';
 import { NextButton } from '@/components/Auth/NextButton';
 import LogoCakeIcon from '@/common/assets/icons/logo-cake.svg';
+import { socialUserInfoAtom } from '@/common/store/atoms/authAtom';
 
 export type FormValues = {
-  profileImage: File | null;
+  profileImage: null | string;
   nickname: string;
 };
 
 export default function ProfileSignUp() {
+  const socialUserInfo = useAtomValue(socialUserInfoAtom);
+
   const {
     handleSubmit,
     control,
+    trigger,
     formState: { isValid },
   } = useForm<FormValues>({
     mode: 'onChange',
+    defaultValues: {
+      profileImage: socialUserInfo?.avatar,
+      nickname: socialUserInfo?.name.replace(/\s+/g, ''),
+    },
   });
   const router = useRouter();
 
@@ -28,6 +38,14 @@ export default function ProfileSignUp() {
     console.log(formValues);
     router.push('/congratulation-sign-up');
   }
+
+  /**
+   * @NOTE
+   * default value 검사입니다.
+   */
+  useEffect(() => {
+    trigger();
+  }, [trigger]);
 
   return (
     <>
