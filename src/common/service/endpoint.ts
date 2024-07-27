@@ -10,6 +10,11 @@ export const AuthEndpointSet = {
       permission: 'public',
       path: '/api/v1/auth/google/signIn',
     },
+    signUp: {
+      method: 'POST',
+      permission: 'public',
+      path: '/api/v1/auth/signUp',
+    },
   },
 } as const;
 

@@ -23,3 +23,7 @@ export function isGuestData(
 ): data is GuestData {
   return (data as GuestData).socialUserInfo !== undefined;
 }
+
+export type SignUpResponse = {
+  data: SignedUserData;
+};
