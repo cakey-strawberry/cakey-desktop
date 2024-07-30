@@ -23,6 +23,8 @@ type NeedSignUpModalProps = {
   onCloseButtonClick: () => void;
 };
 
+const KAKAO_LOGIN_REQUEST_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_OAUTH_REDIRECT_URI}&response_type=code`;
+
 export default function NeedSignUpModal({
   onCloseButtonClick,
 }: NeedSignUpModalProps) {
@@ -31,7 +33,7 @@ export default function NeedSignUpModal({
   const setAuthState = useSetAtom(authAtom);
   const setSocialUserInfo = useSetAtom(socialUserInfoAtom);
 
-  const login = useGoogleLogin({
+  const googleLogin = useGoogleLogin({
     flow: 'auth-code',
     /**
      * @NOTE
@@ -78,7 +80,11 @@ export default function NeedSignUpModal({
   });
 
   function handleSocialLoginButtonClick() {
-    login();
+    googleLogin();
+  }
+
+  function handleKaKaoLoginButtonClick() {
+    window.location.href = KAKAO_LOGIN_REQUEST_URL;
   }
 
   return (
@@ -126,7 +132,7 @@ export default function NeedSignUpModal({
             Google 계정으로 계속하기
           </GoogleLoginButtonText>
         </GoogleLoginButton>
-        <KakaoLoginButton onClick={handleSocialLoginButtonClick}>
+        <KakaoLoginButton onClick={handleKaKaoLoginButtonClick}>
           <Image src={KakaoIcon} width={24} height={24} alt="Kakao logo" />
           <KakaoLoginButtonText>카카오로 계속하기</KakaoLoginButtonText>
         </KakaoLoginButton>

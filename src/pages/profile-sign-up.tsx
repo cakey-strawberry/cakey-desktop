@@ -10,8 +10,8 @@ import { ProfileImage } from '@/components/Auth/ProfileImage';
 import { NextButton } from '@/components/Auth/NextButton';
 import LogoCakeIcon from '@/common/assets/icons/logo-cake.svg';
 import { authAtom, socialUserInfoAtom } from '@/common/store/atoms/authAtom';
-import { useSignUp } from '@/common/queries/useSignUp';
 import { JWT } from '@/common/service/jwt';
+import { useSignUp } from '@/common/repositories/auth/queries/useSignUp';
 
 export type FormValues = {
   profileImage: string;
