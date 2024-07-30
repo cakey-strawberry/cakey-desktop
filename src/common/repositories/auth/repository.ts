@@ -1,5 +1,6 @@
 import { api } from '@/common/service/api';
-import { AuthEndpointSet } from '@/common/service/endpoint';
+
+import { AuthEndpointSet } from './endpoint';
 
 import type { GoogleLoginResponse } from './types';
 

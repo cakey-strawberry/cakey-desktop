@@ -1,5 +1,6 @@
 import { api } from '@/common/service/api';
-import { HealthCheckEndpointSet } from '@/common/service/endpoint';
+
+import { HealthCheckEndpointSet } from './endpoint';
 
 import type { CheckResponse } from './types';
 
