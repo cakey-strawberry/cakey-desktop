@@ -1,13 +1,23 @@
 import Head from 'next/head';
 import Box from '@mui/material/Box';
+import { useAtomValue } from 'jotai';
 
 import { useModal } from '@/common/hooks/useModal';
 import { Store } from '@/components/Main/Store';
 import { GoogleMap } from '@/components/Main/GoogleMap';
 import { ReviewWriteModal } from '@/components/Main/ReviewWriteModal';
+import { authAtom } from '@/common/store/atoms/authAtom';
 
 export default function StoreMap() {
+  const isAuthenticated = useAtomValue(authAtom);
   const { isOpen, openModal, closeModal } = useModal();
+
+  /**
+   * @TODO
+   * 테스트용 콘솔입니다. 차후 삭제해주세요.
+   */
+  console.log(isAuthenticated, 'isAuthenticated');
+
   return (
     <>
       <Head>

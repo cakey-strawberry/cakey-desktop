@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 
 import { useRouter } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { Layout } from '@/common/components/Layout';
 import { NeedSignUpModal } from '@/components/Auth/NeedSignUpModal';
@@ -25,12 +26,16 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Layout onUserProfileClick={handleUserProfileClick}>
-          <Component {...pageProps} />
-          {isOpen && <NeedSignUpModal onCloseButtonClick={closeModal} />}
-        </Layout>
-      </QueryClientProvider>
+      <GoogleOAuthProvider
+        clientId={process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}
+      >
+        <QueryClientProvider client={queryClient}>
+          <Layout onUserProfileClick={handleUserProfileClick}>
+            <Component {...pageProps} />
+            {isOpen && <NeedSignUpModal onCloseButtonClick={closeModal} />}
+          </Layout>
+        </QueryClientProvider>
+      </GoogleOAuthProvider>
     </>
   );
 }

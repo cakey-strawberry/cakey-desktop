@@ -4,10 +4,17 @@ import { AuthEndpointSet } from './endpoint';
 
 import type { GoogleLoginResponse } from './types';
 
+type GoogleLoginRequestParams = {
+  code: string;
+};
+
 export class AuthRepository {
-  static async googleLogin() {
-    return api.get<GoogleLoginResponse>({
+  static async googleLogin({ code }: GoogleLoginRequestParams) {
+    return api.post<GoogleLoginResponse>({
       endpointSet: AuthEndpointSet.auth.googleLogin,
+      body: {
+        code,
+      },
     });
   }
 }

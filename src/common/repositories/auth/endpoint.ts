@@ -6,9 +6,9 @@ export const AuthEndpointSet = {
       path: '/api/v1/auth/refresh',
     },
     googleLogin: {
-      method: 'GET',
+      method: 'POST',
       permission: 'public',
-      path: '/api/v1/auth/google',
+      path: '/api/v1/auth/google/signIn',
     },
   },
 } as const;

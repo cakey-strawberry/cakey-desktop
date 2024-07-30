@@ -1,10 +1,16 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useGoogleLogin } from '@react-oauth/google';
+import { useSetAtom } from 'jotai';
 
 import { Dialog } from '@/common/components/Dialog';
 import LogoIcon from '@/common/assets/icons/logo.svg';
 import KakaoIcon from '@/common/assets/icons/kakao.svg';
 import GoogleIcon from '@/common/assets/icons/google.svg';
+import { isGuestData } from '@/common/repositories/auth/types';
+import { JWT } from '@/common/service/jwt';
+import { authAtom } from '@/common/store/atoms/authAtom';
+import { useGoogleSocialLogin } from '@/common/repositories/auth/queries/useGoogleSocialLogin';
 
 import {
   GoogleLoginButton,
@@ -17,14 +23,68 @@ type NeedSignUpModalProps = {
   onCloseButtonClick: () => void;
 };
 
+type SetTokensParams = {
+  accessToken: string;
+  refreshToken: string;
+};
+
 export default function NeedSignUpModal({
   onCloseButtonClick,
 }: NeedSignUpModalProps) {
   const router = useRouter();
+  const socialLoginQuery = useGoogleSocialLogin();
+  const setAuthState = useSetAtom(authAtom);
+
+  function setTokens({ accessToken, refreshToken }: SetTokensParams) {
+    JWT.setAccessToken(accessToken);
+    JWT.setRefreshToken(refreshToken);
+  }
+
+  const login = useGoogleLogin({
+    flow: 'auth-code',
+    /**
+     * @NOTE
+     * popup mode에서는 redirect_uri를 postmessage로 설정해야 함
+     * https://github.com/MomenSherif/react-oauth/issues/252
+     */
+    redirect_uri: 'postmessage',
+    onSuccess: async (tokenResponse) => {
+      socialLoginQuery.mutate(
+        {
+          code: tokenResponse.code,
+        },
+        {
+          onSuccess: ({ data }) => {
+            if (isGuestData(data)) {
+              onCloseButtonClick();
+              router.push('/privacy-terms-sign-up');
+              return;
+            } else {
+              setTokens({
+                accessToken: data.accessToken,
+                refreshToken: data.refreshToken,
+              });
+
+              setAuthState(true);
+              onCloseButtonClick();
+            }
+          },
+          onError: () => {
+            /**
+             * @TODO
+             * UI 상으로 에러를 보여주어야 합니다.
+             * ex) alert('로그인에 실패했습니다.');
+             */
+
+            onCloseButtonClick();
+          },
+        },
+      );
+    },
+  });
 
   function handleSocialLoginButtonClick() {
-    onCloseButtonClick();
-    router.push('/privacy-terms-sign-up');
+    login();
   }
 
   return (
@@ -38,6 +98,7 @@ export default function NeedSignUpModal({
       >
         <Image src={LogoIcon} alt="logo" width={100} height={22.5} />
       </Dialog.Title>
+
       <Dialog.Content
         sx={{
           width: '328px',
