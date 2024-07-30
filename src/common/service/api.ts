@@ -1,4 +1,5 @@
-import { AuthEndpointSet } from './endpoint';
+import { AuthEndpointSet } from '../repositories/auth/endpoint';
+
 import { JWT, TOKEN_STATUS } from './jwt';
 import { Uri } from './uri';
 
@@ -24,7 +25,7 @@ type PatchProps = RequestProps;
 
 type DeleteProps = Omit<RequestProps, 'body'>;
 
-type ErrorResponseConstructorProps = {
+type ErrorResponseConstructorParams = {
   status: number;
   customErrorCode: string;
   message: string | string[];
@@ -42,7 +43,7 @@ export class ErrorResponse extends Error {
     customErrorCode,
     message,
     timestamp,
-  }: ErrorResponseConstructorProps) {
+  }: ErrorResponseConstructorParams) {
     super(customErrorCode);
 
     this.status = status;

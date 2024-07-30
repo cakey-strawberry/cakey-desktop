@@ -7,10 +7,10 @@ import { Dialog } from '@/common/components/Dialog';
 import LogoIcon from '@/common/assets/icons/logo.svg';
 import KakaoIcon from '@/common/assets/icons/kakao.svg';
 import GoogleIcon from '@/common/assets/icons/google.svg';
-import { useGoogleSocialLogin } from '@/common/queries/useGoogleSocialLogin';
 import { isGuestData } from '@/common/repositories/auth/types';
 import { JWT } from '@/common/service/jwt';
 import { authAtom, socialUserInfoAtom } from '@/common/store/atoms/authAtom';
+import { useGoogleSocialLogin } from '@/common/repositories/auth/queries/useGoogleSocialLogin';
 
 import {
   GoogleLoginButton,

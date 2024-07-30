@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { AuthRepository } from '../repositories/auth/auth';
+import { AuthRepository } from '../repository';
 
 type useSignUpParams = {
   id: string;

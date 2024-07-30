@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { HealthRepository } from '../repositories/health/health';
+import { HealthRepository } from '../repository';
 
 export function useHealthCheck() {
   return useQuery({
