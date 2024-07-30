@@ -2,9 +2,17 @@ import { api } from '@/common/service/api';
 
 import { AuthEndpointSet } from './endpoint';
 
-import type { GoogleLoginResponse, SignUpResponse } from './types';
+import type {
+  GoogleLoginResponse,
+  KakaoLoginResponse,
+  SignUpResponse,
+} from './types';
 
 type GoogleLoginRequestParams = {
+  code: string;
+};
+
+type KakaoLoginRequestParams = {
   code: string;
 };
 
@@ -19,6 +27,15 @@ export class AuthRepository {
   static async googleLogin({ code }: GoogleLoginRequestParams) {
     return api.post<GoogleLoginResponse>({
       endpointSet: AuthEndpointSet.auth.googleLogin,
+      body: {
+        code,
+      },
+    });
+  }
+
+  static async kakaoLogin({ code }: KakaoLoginRequestParams) {
+    return api.post<KakaoLoginResponse>({
+      endpointSet: AuthEndpointSet.auth.kakaoLogin,
       body: {
         code,
       },

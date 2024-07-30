@@ -2,6 +2,10 @@ export type GoogleLoginResponse = {
   data: SignedUserData | GuestData;
 };
 
+export type KakaoLoginResponse = {
+  data: SignedUserData | GuestData;
+};
+
 type SignedUserData = {
   accessToken: string;
   refreshToken: string;
