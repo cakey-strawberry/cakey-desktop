@@ -2,32 +2,89 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { Box, Typography } from '@mui/material';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 
 import { NicknameInput } from '@/components/Auth/NicknameInput';
 import { ProfileImage } from '@/components/Auth/ProfileImage';
 import { NextButton } from '@/components/Auth/NextButton';
 import LogoCakeIcon from '@/common/assets/icons/logo-cake.svg';
+import { authAtom, socialUserInfoAtom } from '@/common/store/atoms/authAtom';
+import { useSignUp } from '@/common/queries/useSignUp';
+import { JWT } from '@/common/service/jwt';
 
 export type FormValues = {
-  profileImage: File | null;
+  profileImage: string;
   nickname: string;
 };
 
 export default function ProfileSignUp() {
+  const setAuthState = useSetAtom(authAtom);
+  const socialUserInfo = useAtomValue(socialUserInfoAtom);
+  const signUpQuery = useSignUp();
+
   const {
     handleSubmit,
     control,
+    trigger,
     formState: { isValid },
   } = useForm<FormValues>({
     mode: 'onChange',
+    defaultValues: {
+      profileImage: socialUserInfo?.avatar,
+      nickname: socialUserInfo?.name
+        ? socialUserInfo?.name.replace(/\s+/g, '')
+        : '',
+    },
   });
   const router = useRouter();
 
   function onSubmit(formValues: FormValues) {
     // TODO: form value 확인용. api 연결 시 해당 console.log는 제거하기
     console.log(formValues);
-    router.push('/congratulation-sign-up');
+
+    if (!socialUserInfo) {
+      return;
+    } else {
+      signUpQuery.mutate(
+        {
+          id: socialUserInfo.id,
+          avatar: formValues.profileImage,
+          name: formValues.nickname,
+          oauthProvider: socialUserInfo.oauthProvider,
+        },
+        {
+          onSuccess: ({ data }) => {
+            JWT.setCredentials({
+              accessToken: data.accessToken,
+              refreshToken: data.refreshToken,
+            });
+
+            setAuthState(true);
+
+            router.push('/congratulation-sign-up');
+          },
+          onError: () => {
+            /**
+             * @TODO
+             * UI 상으로 에러를 보여주어야 합니다.
+             * ex) alert('로그인에 실패했습니다.');
+             */
+
+            router.push('/congratulation-sign-up');
+          },
+        },
+      );
+    }
   }
+
+  /**
+   * @NOTE
+   * default value 검사입니다.
+   */
+  useEffect(() => {
+    trigger();
+  }, [trigger]);
 
   return (
     <>

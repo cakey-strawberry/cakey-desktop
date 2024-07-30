@@ -9,7 +9,7 @@ import KakaoIcon from '@/common/assets/icons/kakao.svg';
 import GoogleIcon from '@/common/assets/icons/google.svg';
 import { isGuestData } from '@/common/repositories/auth/types';
 import { JWT } from '@/common/service/jwt';
-import { authAtom } from '@/common/store/atoms/authAtom';
+import { authAtom, socialUserInfoAtom } from '@/common/store/atoms/authAtom';
 import { useGoogleSocialLogin } from '@/common/repositories/auth/queries/useGoogleSocialLogin';
 
 import {
@@ -23,22 +23,13 @@ type NeedSignUpModalProps = {
   onCloseButtonClick: () => void;
 };
 
-type SetTokensParams = {
-  accessToken: string;
-  refreshToken: string;
-};
-
 export default function NeedSignUpModal({
   onCloseButtonClick,
 }: NeedSignUpModalProps) {
   const router = useRouter();
   const socialLoginQuery = useGoogleSocialLogin();
   const setAuthState = useSetAtom(authAtom);
-
-  function setTokens({ accessToken, refreshToken }: SetTokensParams) {
-    JWT.setAccessToken(accessToken);
-    JWT.setRefreshToken(refreshToken);
-  }
+  const setSocialUserInfo = useSetAtom(socialUserInfoAtom);
 
   const login = useGoogleLogin({
     flow: 'auth-code',
@@ -57,10 +48,13 @@ export default function NeedSignUpModal({
           onSuccess: ({ data }) => {
             if (isGuestData(data)) {
               onCloseButtonClick();
+              const { socialUserInfo } = data;
+              setSocialUserInfo(socialUserInfo);
+
               router.push('/privacy-terms-sign-up');
               return;
             } else {
-              setTokens({
+              JWT.setCredentials({
                 accessToken: data.accessToken,
                 refreshToken: data.refreshToken,
               });

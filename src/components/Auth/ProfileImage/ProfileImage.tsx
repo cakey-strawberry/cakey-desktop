@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Controller } from 'react-hook-form';
 import { Box, Avatar, Badge, IconButton } from '@mui/material';
 import Image from 'next/image';
@@ -14,14 +14,12 @@ type ProfileImageProps = {
 };
 
 export default function ProfileImage({ control }: ProfileImageProps) {
-  const [profileImage, setProfileImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <Controller
       name="profileImage"
       control={control}
-      defaultValue={null}
       render={({ field }) => {
         function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
           const file = event.target.files && event.target.files[0];
@@ -31,13 +29,11 @@ export default function ProfileImage({ control }: ProfileImageProps) {
 
             fileReader.onload = (event: ProgressEvent<FileReader>) => {
               if (event.target?.readyState === FileReader.DONE) {
-                setProfileImage(event.target.result as string);
+                field.onChange(event.target.result);
               }
             };
 
             fileReader.readAsDataURL(file);
-
-            field.onChange(file);
           } else {
             field.onChange(null);
           }
@@ -79,11 +75,15 @@ export default function ProfileImage({ control }: ProfileImageProps) {
                 }}
                 onClick={() => fileInputRef.current?.click()}
               >
-                {
-                  profileImage
-                  ? <Image src={profileImage} alt="추가한 프로필 이미지" fill />
-                  : <Image src={DefaultProfileImage} alt="기본 프로필 이미지" fill />
-                }
+                {field.value ? (
+                  <Image src={field.value} alt="추가한 프로필 이미지" fill />
+                ) : (
+                  <Image
+                    src={DefaultProfileImage}
+                    alt="기본 프로필 이미지"
+                    fill
+                  />
+                )}
               </Avatar>
             </Badge>
           </Box>

@@ -37,6 +37,17 @@ export class JWT {
     }
   }
 
+  public static setCredentials({
+    accessToken,
+    refreshToken,
+  }: {
+    accessToken: string;
+    refreshToken: string;
+  }) {
+    JWT.setAccessToken(accessToken);
+    JWT.setRefreshToken(refreshToken);
+  }
+
   public static setAccessToken(token: string) {
     JWT.checkClientSide();
 
