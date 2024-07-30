@@ -1,10 +1,9 @@
-name: git push into another repo to deploy to vercel
+name: git copy & push to mirror main branch
 
 on:
   push:
     branches:
       - main
-      - dev
   workflow_dispatch:
 
 jobs:
