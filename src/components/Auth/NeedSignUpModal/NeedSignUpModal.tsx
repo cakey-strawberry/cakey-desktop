@@ -10,7 +10,7 @@ import GoogleIcon from '@/common/assets/icons/google.svg';
 import { isGuestData } from '@/common/repositories/auth/types';
 import { JWT } from '@/common/service/jwt';
 import { authAtom } from '@/common/store/atoms/authAtom';
-import { useGoogleSocialLogin } from '@/common/repositories/health/queries/useGoogleSocialLogin';
+import { useGoogleSocialLogin } from '@/common/repositories/auth/queries/useGoogleSocialLogin';
 
 import {
   GoogleLoginButton,

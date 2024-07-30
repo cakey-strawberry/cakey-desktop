@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { AuthRepository } from '../../auth/repository';
+import { AuthRepository } from '../repository';
 
 type GoogleLoginMutationParams = {
   code: string;
