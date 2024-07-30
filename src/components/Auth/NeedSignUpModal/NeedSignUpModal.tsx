@@ -84,7 +84,6 @@ export default function NeedSignUpModal({
   }
 
   function handleKaKaoLoginButtonClick() {
-    console.log('카카오 로그인');
     window.location.href = KAKAO_LOGIN_REQUEST_URL;
   }
 
