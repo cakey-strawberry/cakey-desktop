@@ -20,5 +20,10 @@ export const AuthEndpointSet = {
       permission: 'public',
       path: '/api/v1/auth/signUp',
     },
+    autoSignIn: {
+      method: 'GET',
+      permission: 'private',
+      path: '/api/v1/auth/autoSignIn',
+    },
   },
 } as const;

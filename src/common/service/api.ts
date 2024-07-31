@@ -304,6 +304,7 @@ class APIClient {
         path: AuthEndpointSet.auth.refreshTokens.path,
       }),
       {
+        method: AuthEndpointSet.auth.refreshTokens.method,
         headers: {
           Authorization: `Bearer ${storedRefreshToken}`,
         },
