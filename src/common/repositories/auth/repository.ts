@@ -58,4 +58,10 @@ export class AuthRepository {
       },
     });
   }
+
+  static async autoSignIn() {
+    return api.get({
+      endpointSet: AuthEndpointSet.auth.autoSignIn,
+    });
+  }
 }

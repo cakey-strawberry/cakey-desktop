@@ -1,16 +1,26 @@
 import Head from 'next/head';
 import Box from '@mui/material/Box';
-import { useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 
 import { useModal } from '@/common/hooks/useModal';
 import { Store } from '@/components/Main/Store';
 import { GoogleMap } from '@/components/Main/GoogleMap';
 import { ReviewWriteModal } from '@/components/Main/ReviewWriteModal';
 import { authAtom } from '@/common/store/atoms/authAtom';
+import { useAutoSignIn } from '@/common/repositories/auth/queries/useAutoSignIn';
 
 export default function StoreMap() {
-  const isAuthenticated = useAtomValue(authAtom);
+  const [isAuthenticated, setAuthenticated] = useAtom(authAtom);
   const { isOpen, openModal, closeModal } = useModal();
+
+  const { status } = useAutoSignIn();
+
+  useEffect(() => {
+    if (status === 'success') {
+      setAuthenticated(true);
+    }
+  }, [status, setAuthenticated]);
 
   /**
    * @TODO
